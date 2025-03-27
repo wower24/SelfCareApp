@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    kotlin("kapt")
 }
 
 android {
@@ -40,7 +41,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -56,4 +56,42 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation("androidx.appcompat:appcompat:${rootProject.extra.get("appCompatVersion") as String}")
+    implementation("androidx.activity:activity-ktx:${rootProject.extra.get("activityVersion") as String}")
+
+    // Dependencies for working with Architecture components
+    // You'll probably have to update the version numbers in build.gradle (Project)
+
+    // Room components
+    implementation("androidx.room:room-ktx:${rootProject.extra.get("roomVersion") as String}")
+    kapt("androidx.room:room-compiler:${rootProject.extra.get("roomVersion") as String}")
+    androidTestImplementation("androidx.room:room-testing:${rootProject.extra.get("roomVersion") as String}")
+
+    // Lifecycle components
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${rootProject.extra.get("lifecycleVersion") as String}")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${rootProject.extra.get("lifecycleVersion") as String}")
+    implementation("androidx.lifecycle:lifecycle-common-java8:${rootProject.extra.get("lifecycleVersion") as String}")
+
+    // Kotlin components
+    // implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version") // kotlin-stdlib is already provided by the kotlin plugin
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:${rootProject.extra.get("coroutines") as String}")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:${rootProject.extra.get("coroutines") as String}")
+
+    // UI
+    implementation("androidx.constraintlayout:constraintlayout:${rootProject.extra.get("constraintLayoutVersion") as String}")
+    implementation("com.google.android.material:material:${rootProject.extra.get("materialVersion") as String}")
+
+    // Testing
+    testImplementation("junit:junit:${rootProject.extra.get("junitVersion") as String}")
+    androidTestImplementation("androidx.arch.core:core-testing:${rootProject.extra.get("coreTestingVersion") as String}")
+    androidTestImplementation("androidx.test.espresso:espresso-core:${rootProject.extra.get("espressoVersion") as String}") {
+        exclude(group = "com.android.support", module = "support-annotations")
+    }
+    androidTestImplementation("androidx.test.ext:junit:${rootProject.extra.get("androidxJunitVersion") as String}")
+}
+
+fun DependencyHandlerScope.kapt(dependency:
+                                ProviderConvertible<MinimalExternalModuleDependency>) {
+    add("kapt", dependency)
 }
