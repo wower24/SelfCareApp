@@ -93,6 +93,9 @@ dependencies {
         exclude(group = "com.android.support", module = "support-annotations")
     }
     androidTestImplementation("androidx.test.ext:junit:${rootProject.extra.get("androidxJunitVersion") as String}")
+
+    implementation("com.google.dagger:dagger:2.56")
+    kapt("com.google.dagger:dagger-compiler:2.56")
 }
 
 fun DependencyHandlerScope.kapt(dependency:
