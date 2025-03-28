@@ -38,6 +38,10 @@ android {
     buildFeatures {
         compose = true
     }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/atomicfu.kotlin_module")
+    }
 }
 
 dependencies {
