@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.wower.selfcareapp.data.local.model.JournalEntry
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface JournalEntryDao {
@@ -15,11 +16,11 @@ interface JournalEntryDao {
     suspend fun delete(entryId: Int)
 
     @Query("SELECT * FROM journal_entries ORDER BY date DESC")
-    suspend fun getAllEntries(): List<JournalEntry>
+    suspend fun getAllEntries(): Flow<List<JournalEntry>>
 
     @Query("SELECT * FROM journal_entries WHERE id = :entryId")
-    suspend fun getEntryById(entryId: Int): JournalEntry?
+    suspend fun getEntryById(entryId: Int): Flow<JournalEntry?>
 
     @Query("SELECT * FROM journal_entries WHERE prompt = :prompt ORDER BY date DESC")
-    suspend fun getEntriesByPrompt(prompt: String): List<JournalEntry>
+    suspend fun getEntriesByPrompt(prompt: String): Flow<List<JournalEntry>>
 }
