@@ -14,7 +14,7 @@ interface JournalPromptDao {
     suspend fun insert(journalPrompt: JournalPrompt)
     //get a random prompt that is not used yet
     @Query("SELECT * FROM journal_prompts WHERE isNotUsed = 1 LIMIT 1")
-    suspend fun getRandomPrompt(): Flow<JournalPrompt>
+    fun getRandomPrompt(): Flow<JournalPrompt>
     //mark prompt as used so it's not repeated in the cycle
     @Query("UPDATE journal_prompts SET isNotUsed = 0 WHERE id = :promptId")
     suspend fun markPromptAsUsed(promptId: Int)

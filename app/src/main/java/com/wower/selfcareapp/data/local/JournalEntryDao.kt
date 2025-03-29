@@ -16,11 +16,11 @@ interface JournalEntryDao {
     suspend fun delete(entryId: Int)
 
     @Query("SELECT * FROM journal_entries ORDER BY date DESC")
-    suspend fun getAllEntries(): Flow<List<JournalEntry>>
+    fun getAllEntries(): Flow<List<JournalEntry>>
 
     @Query("SELECT * FROM journal_entries WHERE id = :entryId")
-    suspend fun getEntryById(entryId: Int): Flow<JournalEntry?>
+    fun getEntryById(entryId: Int): Flow<JournalEntry?>
 
     @Query("SELECT * FROM journal_entries WHERE prompt = :prompt ORDER BY date DESC")
-    suspend fun getEntriesByPrompt(prompt: String): Flow<List<JournalEntry>>
+    fun getEntriesByPrompt(prompt: String): Flow<List<JournalEntry>>
 }

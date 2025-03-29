@@ -14,7 +14,7 @@ buildscript {
         set("coroutines", "1.5.0")
         set("lifecycleVersion", "2.3.1")
         set("materialVersion", "1.3.0")
-        set("roomVersion", "2.3.0")
+        set("roomVersion", "2.6.1")
         set("junitVersion", "4.13.2")
         set("espressoVersion", "3.1.0")
         set("androidxJunitVersion", "1.1.2")

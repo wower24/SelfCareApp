@@ -7,7 +7,7 @@ import javax.inject.Inject
 class JournalEntryRepository @Inject constructor(private val journalEntryDao: JournalEntryDao) {
     suspend fun insert(journalEntry: JournalEntry) = journalEntryDao.insert(journalEntry)
     suspend fun delete(entryId: Int) = journalEntryDao.delete(entryId)
-    suspend fun getAllEntries() = journalEntryDao.getAllEntries()
-    suspend fun getEntryById(entryId: Int) = journalEntryDao.getEntryById(entryId)
-    suspend fun getEntriesByPrompt(prompt: String) = journalEntryDao.getEntriesByPrompt(prompt)
+    fun getAllEntries() = journalEntryDao.getAllEntries()
+    fun getEntryById(entryId: Int) = journalEntryDao.getEntryById(entryId)
+    fun getEntriesByPrompt(prompt: String) = journalEntryDao.getEntriesByPrompt(prompt)
 }

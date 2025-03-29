@@ -96,6 +96,9 @@ dependencies {
 
     implementation("com.google.dagger:dagger:2.56")
     kapt("com.google.dagger:dagger-compiler:2.56")
+
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-compiler:2.51.1")
 }
 
 fun DependencyHandlerScope.kapt(dependency:

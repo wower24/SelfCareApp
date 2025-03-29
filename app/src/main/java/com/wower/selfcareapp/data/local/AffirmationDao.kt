@@ -15,7 +15,7 @@ interface AffirmationDao {
     suspend fun insert(affirmation: Affirmation)
     //get a random affirmation that is not used yet
     @Query("SELECT * FROM affirmations WHERE isNotUsed = 1 LIMIT 1")
-    suspend fun getRandomAffirmation(): Flow<Affirmation>
+    fun getRandomAffirmation(): Flow<Affirmation>
     //mark affirmation as used so it's not repeated in the cycle
     @Query("UPDATE affirmations SET isNotUsed = 0 WHERE id = :affirmationId")
     suspend fun markAffirmationAsUsed(affirmationId: Int)
