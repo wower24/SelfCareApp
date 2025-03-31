@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetEntriesByPromptUseCase @Inject constructor(
-    val journalEntryRepository: JournalEntryRepository
+    private val journalEntryRepository: JournalEntryRepository
 ) {
     operator fun invoke(prompt: String): Flow<List<JournalEntry>> = journalEntryRepository.getEntriesByPrompt(prompt)
 }

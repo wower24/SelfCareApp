@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetEntryByIdUseCase @Inject constructor(
-    val journalEntryRepository: JournalEntryRepository
+    private val journalEntryRepository: JournalEntryRepository
 ) {
     operator fun invoke(entryId: Int): Flow<JournalEntry?> = journalEntryRepository.getEntryById(entryId)
 }

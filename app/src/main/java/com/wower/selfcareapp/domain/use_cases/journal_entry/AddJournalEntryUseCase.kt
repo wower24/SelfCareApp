@@ -5,7 +5,7 @@ import com.wower.selfcareapp.domain.repositories.JournalEntryRepository
 import javax.inject.Inject
 
 class AddJournalEntryUseCase @Inject constructor(
-    val journalEntryRepository: JournalEntryRepository
+    private val journalEntryRepository: JournalEntryRepository
 ) {
     suspend operator fun invoke(journalEntry: JournalEntry) = journalEntryRepository.insert(journalEntry)
 }

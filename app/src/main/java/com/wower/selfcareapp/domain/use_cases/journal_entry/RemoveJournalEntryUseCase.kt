@@ -4,7 +4,7 @@ import com.wower.selfcareapp.domain.repositories.JournalEntryRepository
 import javax.inject.Inject
 
 class RemoveJournalEntryUseCase @Inject constructor(
-    val journalEntryRepository: JournalEntryRepository
+    private val journalEntryRepository: JournalEntryRepository
 ) {
     suspend operator fun invoke(entryId: Int) = journalEntryRepository.delete(entryId)
 }

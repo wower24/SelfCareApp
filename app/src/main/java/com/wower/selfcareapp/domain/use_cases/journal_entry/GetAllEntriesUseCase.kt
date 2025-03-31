@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetAllEntriesUseCase @Inject constructor(
-    val journalEntryRepository: JournalEntryRepository
+    private val journalEntryRepository: JournalEntryRepository
 ) {
     operator fun invoke(): Flow<List<JournalEntry>> = journalEntryRepository.getAllEntries()
 }
