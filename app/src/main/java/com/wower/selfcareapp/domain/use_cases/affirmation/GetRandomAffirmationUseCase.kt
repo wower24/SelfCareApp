@@ -8,5 +8,5 @@ import javax.inject.Inject
 class GetRandomAffirmationUseCase @Inject constructor(
     private val affirmationRepository: AffirmationRepository
 ) {
-    suspend operator fun invoke(): Flow<Affirmation> = affirmationRepository.getRandomAffirmation()
+    operator fun invoke(): Flow<Affirmation> = affirmationRepository.getRandomAffirmation()
 }
