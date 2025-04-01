@@ -1,5 +1,6 @@
 package com.wower.selfcareapp.presentation.journal_entry
 
+import android.app.VoiceInteractor.Prompt
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.wower.selfcareapp.data.local.model.JournalEntry
 import com.wower.selfcareapp.domain.use_cases.journal_entry.AddJournalEntryUseCase
 import com.wower.selfcareapp.domain.use_cases.journal_entry.GetEntryByIdUseCase
+import com.wower.selfcareapp.domain.use_cases.journal_prompt.GetRandomPromptUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -17,6 +19,7 @@ import kotlinx.coroutines.launch
 class JournalEntryViewModel @AssistedInject constructor(
     private val addJournalEntryUseCase: AddJournalEntryUseCase,
     private val getEntryByIdUseCase: GetEntryByIdUseCase,
+    private val getRandomPromptUseCase: GetRandomPromptUseCase,
     @Assisted private val entryId: Int
 ): ViewModel() {
     var state by mutableStateOf(JournalEntryState())
@@ -38,12 +41,19 @@ class JournalEntryViewModel @AssistedInject constructor(
         initialize()
     }
 
+    private fun loadRandomPrompt() = viewModelScope.launch{
+        val prompt: String = getRandomPromptUseCase().collect { it.text }.toString()
+        state = state.copy(prompt = prompt)
+    }
+
     private fun initialize() {
         val isUpdatingEntry = entryId != -1
         state = state.copy(isUpdatingEntry = isUpdatingEntry)
 
         if(isUpdatingEntry) {
             getEntryById()
+        } else {
+            loadRandomPrompt()
         }
     }
 
