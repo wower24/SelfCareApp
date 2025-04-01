@@ -15,6 +15,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class JournalEntryViewModel @AssistedInject constructor(
     private val addJournalEntryUseCase: AddJournalEntryUseCase,
@@ -63,7 +64,7 @@ class JournalEntryViewModel @AssistedInject constructor(
                 id = entry?.id ?: 0,
                 prompt = entry?.prompt ?: "",
                 content = entry?.content ?: "",
-                date = entry?.date ?: ""
+                date = Date()
             )
         }
     }
@@ -81,7 +82,7 @@ data class JournalEntryState(
     val id: Int = 0,
     val prompt: String = "",
     val content: String = "",
-    val date: String = "",
+    val date: Date = Date(),
     val isUpdatingEntry: Boolean = false
 )
 
