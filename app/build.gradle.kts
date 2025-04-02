@@ -94,6 +94,9 @@ dependencies {
     }
     androidTestImplementation("androidx.test.ext:junit:${rootProject.extra.get("androidxJunitVersion") as String}")
 
+    testImplementation("io.mockk:mockk:1.13.11") // Or the latest version
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+
     implementation("com.google.dagger:dagger:2.56")
     kapt("com.google.dagger:dagger-compiler:2.56")
 
