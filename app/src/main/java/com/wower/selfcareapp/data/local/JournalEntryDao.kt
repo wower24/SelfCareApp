@@ -27,5 +27,5 @@ interface JournalEntryDao {
     fun getEntriesByPrompt(prompt: String): Flow<List<JournalEntry>>
 
     @Query("SELECT * FROM journal_entries WHERE date = :date LIMIT 1")
-    fun getEntryByDate(date: Date): JournalEntry?
+    fun getEntryByDate(date: LocalDate): Flow<JournalEntry?>
 }

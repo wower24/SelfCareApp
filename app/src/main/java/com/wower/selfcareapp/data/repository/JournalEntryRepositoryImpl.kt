@@ -3,6 +3,7 @@ package com.wower.selfcareapp.data.repository
 import com.wower.selfcareapp.data.local.JournalEntryDao
 import com.wower.selfcareapp.data.local.model.JournalEntry
 import com.wower.selfcareapp.domain.repositories.JournalEntryRepository
+import java.time.LocalDate
 import java.util.Date
 import javax.inject.Inject
 
@@ -13,6 +14,5 @@ class JournalEntryRepositoryImpl
     override fun getAllEntries() = journalEntryDao.getAllEntries()
     override fun getEntryById(entryId: Int) = journalEntryDao.getEntryById(entryId)
     override fun getEntriesByPrompt(prompt: String) = journalEntryDao.getEntriesByPrompt(prompt)
-    override fun getEntryByDate(date: Date) = journalEntryDao.getEntryByDate(date)
-
+    override fun getEntryByDate(date: LocalDate) = journalEntryDao.getEntryByDate(date)
 }

@@ -1,5 +1,7 @@
 package com.wower.selfcareapp.presentation.journal_entry
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -29,6 +32,8 @@ fun JournalEntryScreen(
     assistedFactory: JournalEntryViewModelAssistedFactory,
     navigateUp: () -> Unit
 ) {
+    var context: Context = LocalContext.current
+
     val viewModel = viewModel(
         modelClass = JournalEntryViewModel::class.java,
         factory = JournalEntryViewModelFactory(
@@ -46,7 +51,15 @@ fun JournalEntryScreen(
         isFormNotBlank = viewModel.isFormNotBlank,
         onContentChange = viewModel::onContentChange,
         onButtonClick = {
-            viewModel.addEntry()
+            if (!state.hasEntryForToday) {
+                viewModel.addEntry()
+            } else {
+                Toast.makeText(
+                    context,
+                    "You have already added an entry for today.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         },
         onNavigate = navigateUp
     )

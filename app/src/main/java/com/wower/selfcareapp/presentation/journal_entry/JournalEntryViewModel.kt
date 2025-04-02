@@ -9,18 +9,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.wower.selfcareapp.data.local.model.JournalEntry
 import com.wower.selfcareapp.domain.use_cases.journal_entry.AddJournalEntryUseCase
+import com.wower.selfcareapp.domain.use_cases.journal_entry.GetEntryByDateUseCase
 import com.wower.selfcareapp.domain.use_cases.journal_entry.GetEntryByIdUseCase
 import com.wower.selfcareapp.domain.use_cases.journal_prompt.GetRandomPromptUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.util.Date
 
 class JournalEntryViewModel @AssistedInject constructor(
     private val addJournalEntryUseCase: AddJournalEntryUseCase,
     private val getEntryByIdUseCase: GetEntryByIdUseCase,
     private val getRandomPromptUseCase: GetRandomPromptUseCase,
+    private val getEntryByDateUseCase: GetEntryByDateUseCase,
     @Assisted private val entryId: Int
 ): ViewModel() {
     var state by mutableStateOf(JournalEntryState())
@@ -54,17 +57,33 @@ class JournalEntryViewModel @AssistedInject constructor(
         if(isUpdatingEntry) {
             getEntryById()
         } else {
-            loadRandomPrompt()
+            checkIfEntryExistsForToday()
         }
     }
 
+    private fun checkIfEntryExistsForToday() {
+        viewModelScope.launch {
+            val entry: String = getEntryByDateUseCase(LocalDate.now()).collect { it?.content }.toString()
+
+            if(entry != "") {
+                state = state.copy(hasEntryForToday = true)
+                state = state.copy(isEntryAdded = true)
+                state = state.copy(isUpdatingEntry = true)
+                getEntryById()
+            } else {
+                state = state.copy(hasEntryForToday = false)
+                loadRandomPrompt()
+            }
+        }
+
+    }
     private fun getEntryById() = viewModelScope.launch {
         getEntryByIdUseCase(entryId).collect { entry ->
             state = state.copy(
                 id = entry?.id ?: 0,
                 prompt = entry?.prompt ?: "",
                 content = entry?.content ?: "",
-                date = Date()
+                date = entry?.date ?: LocalDate.now()
             )
         }
     }
@@ -82,8 +101,10 @@ data class JournalEntryState(
     val id: Int = 0,
     val prompt: String = "",
     val content: String = "",
-    val date: Date = Date(),
-    val isUpdatingEntry: Boolean = false
+    val date: LocalDate = LocalDate.now(),
+    val isUpdatingEntry: Boolean = false,
+    val hasEntryForToday: Boolean = false,
+    val isEntryAdded: Boolean = false
 )
 
 class JournalEntryViewModelFactory(

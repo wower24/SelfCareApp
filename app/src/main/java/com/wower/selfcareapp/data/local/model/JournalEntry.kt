@@ -2,6 +2,7 @@ package com.wower.selfcareapp.data.local.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.time.LocalDate
 import java.util.Date
 
 @Entity(tableName = "journal_entries")
@@ -10,5 +11,5 @@ data class JournalEntry (
     var id: Int = 0,
     var prompt: String = "",
     var content: String = "",
-    var date: Date = Date()
+    var date: LocalDate = LocalDate.now()
 )

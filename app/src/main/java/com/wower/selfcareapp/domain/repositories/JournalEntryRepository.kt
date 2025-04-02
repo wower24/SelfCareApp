@@ -2,6 +2,7 @@ package com.wower.selfcareapp.domain.repositories
 
 import com.wower.selfcareapp.data.local.model.JournalEntry
 import kotlinx.coroutines.flow.Flow
+import java.time.LocalDate
 import java.util.Date
 
 interface JournalEntryRepository {
@@ -10,5 +11,5 @@ interface JournalEntryRepository {
     fun getAllEntries(): Flow<List<JournalEntry>>
     fun getEntryById(entryId: Int): Flow<JournalEntry?>
     fun getEntriesByPrompt(prompt: String): Flow<List<JournalEntry>>
-    fun getEntryByDate(date: Date): JournalEntry?
+    fun getEntryByDate(date: LocalDate): Flow<JournalEntry?>
 }
