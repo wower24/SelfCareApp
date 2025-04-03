@@ -77,6 +77,7 @@ class JournalEntryViewModel @AssistedInject constructor(
         }
 
     }
+
     private fun getEntryById() = viewModelScope.launch {
         getEntryByIdUseCase(entryId).collect { entry ->
             state = state.copy(
