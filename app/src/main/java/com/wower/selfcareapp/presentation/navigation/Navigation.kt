@@ -22,7 +22,7 @@ enum class Screens {
 }
 
 @Composable
-fun NoteNavigation(
+fun AppNavigation(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
     journalViewModel: JournalViewModel,

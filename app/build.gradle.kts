@@ -1,8 +1,9 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    kotlin("kapt")
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -20,7 +21,7 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -38,74 +39,59 @@ android {
     buildFeatures {
         compose = true
     }
-
     packagingOptions {
-        resources.excludes.add("META-INF/atomicfu.kotlin_module")
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
+
 }
+/*
+composeCompiler {
+    reportsDestination = layout.buildDirectory.dir("compose_compiler")
+    stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
+}
+ */
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    val composeBom = platform("androidx.compose:compose-bom:2023.06.00")
+    val kotlinBom = platform("org.jetbrains.kotlin:kotlin-bom:1.9.21")
+    implementation(kotlinBom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.activity:activity-compose:1.7.2")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    implementation("androidx.appcompat:appcompat:${rootProject.extra.get("appCompatVersion") as String}")
-    implementation("androidx.activity:activity-ktx:${rootProject.extra.get("activityVersion") as String}")
+    //accompanist
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.5-beta")
 
-    // Dependencies for working with Architecture components
-    // You'll probably have to update the version numbers in build.gradle (Project)
+    // extended Icons
+    implementation("androidx.compose.material:material-icons-extended")
+// Navigation Compose
+    implementation("androidx.navigation:navigation-compose")
 
-    // Room components
-    implementation("androidx.room:room-ktx:${rootProject.extra.get("roomVersion") as String}")
-    kapt("androidx.room:room-compiler:${rootProject.extra.get("roomVersion") as String}")
-    androidTestImplementation("androidx.room:room-testing:${rootProject.extra.get("roomVersion") as String}")
-
-    // Lifecycle components
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${rootProject.extra.get("lifecycleVersion") as String}")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${rootProject.extra.get("lifecycleVersion") as String}")
-    implementation("androidx.lifecycle:lifecycle-common-java8:${rootProject.extra.get("lifecycleVersion") as String}")
-
-    // Kotlin components
-    // implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version") // kotlin-stdlib is already provided by the kotlin plugin
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:${rootProject.extra.get("coroutines") as String}")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:${rootProject.extra.get("coroutines") as String}")
-
-    // UI
-    implementation("androidx.constraintlayout:constraintlayout:${rootProject.extra.get("constraintLayoutVersion") as String}")
-    implementation("com.google.android.material:material:${rootProject.extra.get("materialVersion") as String}")
-
-    // Testing
-    testImplementation("junit:junit:${rootProject.extra.get("junitVersion") as String}")
-    androidTestImplementation("androidx.arch.core:core-testing:${rootProject.extra.get("coreTestingVersion") as String}")
-    androidTestImplementation("androidx.test.espresso:espresso-core:${rootProject.extra.get("espressoVersion") as String}") {
-        exclude(group = "com.android.support", module = "support-annotations")
-    }
-    androidTestImplementation("androidx.test.ext:junit:${rootProject.extra.get("androidxJunitVersion") as String}")
-
-    testImplementation("io.mockk:mockk:1.13.11") // Or the latest version
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
-
-    implementation("com.google.dagger:dagger:2.56")
-    kapt("com.google.dagger:dagger-compiler:2.56")
-
+    // Dagger - Hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
     kapt("com.google.dagger:hilt-compiler:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
-
-    implementation("androidx.navigation:navigation-compose:2.7.7")
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    testImplementation("androidx.room:room-testing:$room_version")
+    androidTestImplementation("androidx.room:room-testing:$room_version")
 }
 
 fun DependencyHandlerScope.kapt(dependency:
