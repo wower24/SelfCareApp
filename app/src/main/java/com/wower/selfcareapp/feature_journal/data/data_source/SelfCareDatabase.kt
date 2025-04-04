@@ -11,4 +11,8 @@ import com.wower.selfcareapp.feature_journal.domain.model.JournalEntry
 )
 abstract class SelfCareDatabase: RoomDatabase() {
     abstract val journalEntryDao: JournalEntryDao
+
+    companion object {
+        const val DATABASE_NAME = "self_care_db"
+    }
 }
