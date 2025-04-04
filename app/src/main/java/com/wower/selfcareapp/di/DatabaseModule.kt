@@ -2,9 +2,7 @@ package com.wower.selfcareapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.wower.selfcareapp.data.local.AffirmationDao
 import com.wower.selfcareapp.data.local.JournalEntryDao
-import com.wower.selfcareapp.data.local.JournalPromptDao
 import com.wower.selfcareapp.data.local.SelfCareDatabase
 import dagger.Module
 import dagger.Provides
@@ -19,15 +17,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideAffirmationDao(database: SelfCareDatabase): AffirmationDao = database.affirmationDao
-
-    @Provides
-    @Singleton
     fun provideJournalEntryDao(database: SelfCareDatabase): JournalEntryDao = database.journalEntryDao
-
-    @Provides
-    @Singleton
-    fun provideJournalPromptDao(database: SelfCareDatabase): JournalPromptDao = database.journalPromptDao
 
     @Provides
     @Singleton

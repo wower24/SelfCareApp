@@ -11,7 +11,6 @@ import com.wower.selfcareapp.data.local.model.JournalEntry
 import com.wower.selfcareapp.domain.use_cases.journal_entry.AddJournalEntryUseCase
 import com.wower.selfcareapp.domain.use_cases.journal_entry.GetEntryByDateUseCase
 import com.wower.selfcareapp.domain.use_cases.journal_entry.GetEntryByIdUseCase
-import com.wower.selfcareapp.domain.use_cases.journal_prompt.GetRandomPromptUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -22,8 +21,6 @@ import java.util.Date
 class JournalEntryViewModel @AssistedInject constructor(
     private val addJournalEntryUseCase: AddJournalEntryUseCase,
     private val getEntryByIdUseCase: GetEntryByIdUseCase,
-    private val getRandomPromptUseCase: GetRandomPromptUseCase,
-    private val getEntryByDateUseCase: GetEntryByDateUseCase,
     @Assisted private val entryId: Int
 ): ViewModel() {
     var state by mutableStateOf(JournalEntryState())
@@ -45,37 +42,13 @@ class JournalEntryViewModel @AssistedInject constructor(
         initialize()
     }
 
-    private fun loadRandomPrompt() = viewModelScope.launch{
-        val prompt: String = getRandomPromptUseCase().collect { it.text }.toString()
-        state = state.copy(prompt = prompt)
-    }
-
     private fun initialize() {
         val isUpdatingEntry = entryId != -1
         state = state.copy(isUpdatingEntry = isUpdatingEntry)
 
         if(isUpdatingEntry) {
             getEntryById()
-        } else {
-            checkIfEntryExistsForToday()
         }
-    }
-
-    private fun checkIfEntryExistsForToday() {
-        viewModelScope.launch {
-            val entry: String = getEntryByDateUseCase(LocalDate.now()).collect { it?.content }.toString()
-
-            if(entry != "") {
-                state = state.copy(hasEntryForToday = true)
-                state = state.copy(isEntryAdded = true)
-                state = state.copy(isUpdatingEntry = true)
-                getEntryById()
-            } else {
-                state = state.copy(hasEntryForToday = false)
-                loadRandomPrompt()
-            }
-        }
-
     }
 
     private fun getEntryById() = viewModelScope.launch {

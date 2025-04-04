@@ -7,7 +7,6 @@ import androidx.room.Query
 import com.wower.selfcareapp.data.local.model.JournalEntry
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
-import java.util.Date
 
 @Dao
 interface JournalEntryDao {

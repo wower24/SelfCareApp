@@ -1,5 +1,6 @@
-package com.wower.selfcareapp.data.repository
-import com.wower.selfcareapp.domain.repositories.AffirmationRepository
+package com.wower.selfcareapp.di
+
+import com.wower.selfcareapp.data.repository.JournalEntryRepositoryImpl
 import com.wower.selfcareapp.domain.repositories.JournalEntryRepository
 import dagger.Binds
 import dagger.Module
