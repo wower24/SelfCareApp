@@ -46,12 +46,6 @@ android {
     }
 
 }
-/*
-composeCompiler {
-    reportsDestination = layout.buildDirectory.dir("compose_compiler")
-    stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
-}
- */
 
 dependencies {
     val composeBom = platform("androidx.compose:compose-bom:2023.06.00")
