@@ -11,3 +11,5 @@ data class JournalEntry (
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null
 )
+
+class InvalidEntryException(message: String): Exception(message)

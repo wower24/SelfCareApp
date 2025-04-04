@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.wower.selfcareapp.feature_journal.data.data_source.SelfCareDatabase
 import com.wower.selfcareapp.feature_journal.data.repository.JournalEntryRepositoryImpl
 import com.wower.selfcareapp.feature_journal.domain.repository.JournalEntryRepository
+import com.wower.selfcareapp.feature_journal.domain.use_case.AddEntry
 import com.wower.selfcareapp.feature_journal.domain.use_case.DeleteEntry
 import com.wower.selfcareapp.feature_journal.domain.use_case.EntryUseCases
 import com.wower.selfcareapp.feature_journal.domain.use_case.GetEntries
@@ -38,7 +39,8 @@ object AppModule {
     fun provideEntryUseCases(repository: JournalEntryRepository): EntryUseCases {
         return EntryUseCases(
             getEntries = GetEntries(repository),
-            deleteEntry = DeleteEntry(repository)
+            deleteEntry = DeleteEntry(repository),
+            addEntry = AddEntry(repository)
         )
     }
 }
