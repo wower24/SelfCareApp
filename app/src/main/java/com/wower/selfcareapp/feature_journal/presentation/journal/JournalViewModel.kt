@@ -7,6 +7,8 @@ import com.wower.selfcareapp.feature_journal.domain.model.JournalEntry
 import com.wower.selfcareapp.feature_journal.domain.use_case.EntryUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,6 +20,10 @@ class JournalViewModel @Inject constructor(
     val state = _state
 
     private var recentlyDeletedEntry: JournalEntry? = null
+
+    init {
+        getEntries()
+    }
 
     fun onEvent(event: JournalEvent) {
         when(event) {
@@ -34,5 +40,14 @@ class JournalViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun getEntries() {
+        entryUseCases.getEntries().onEach { entries ->
+            _state.value = state.value.copy(
+                entries = entries
+            )
+        }
+            .launchIn(viewModelScope)
     }
 }
