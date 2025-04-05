@@ -9,6 +9,7 @@ import com.wower.selfcareapp.feature_journal.domain.use_case.AddEntry
 import com.wower.selfcareapp.feature_journal.domain.use_case.DeleteEntry
 import com.wower.selfcareapp.feature_journal.domain.use_case.EntryUseCases
 import com.wower.selfcareapp.feature_journal.domain.use_case.GetEntries
+import com.wower.selfcareapp.feature_journal.domain.use_case.GetEntryById
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,7 +41,8 @@ object AppModule {
         return EntryUseCases(
             getEntries = GetEntries(repository),
             deleteEntry = DeleteEntry(repository),
-            addEntry = AddEntry(repository)
+            addEntry = AddEntry(repository),
+            getEntryById = GetEntryById(repository)
         )
     }
 }

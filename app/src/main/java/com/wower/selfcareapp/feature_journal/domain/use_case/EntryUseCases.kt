@@ -3,5 +3,6 @@ package com.wower.selfcareapp.feature_journal.domain.use_case
 data class EntryUseCases(
     val getEntries: GetEntries,
     val deleteEntry: DeleteEntry,
-    val addEntry: AddEntry
+    val addEntry: AddEntry,
+    val getEntryById: GetEntryById
 )
