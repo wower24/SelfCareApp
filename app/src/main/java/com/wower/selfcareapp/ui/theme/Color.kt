@@ -2,10 +2,18 @@ package com.wower.selfcareapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+object SelfCareColor {
+//regular palette
+    val DarkPink = Color(0xFFC75E6B)
+    val Yellow = Color(0xFFF4C871)
+    val RegularWhite = Color(0xFFF3F0E6)
+    val LightBlue = Color(0xFFA4BBC5)
+    val DarkBlue = Color(0xFF196AA5)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+//calm palette
+    val DarkGreen = Color(0xFF94AD73)
+    val LightGreen = Color(0xFFC3D6AE)
+    val CalmWhite = Color(0xFFF4F2EC)
+    val Gray = Color(0xFFE6E1DC)
+    val LightPink = Color(0xFFDDB3C4)
+}
