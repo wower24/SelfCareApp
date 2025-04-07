@@ -53,7 +53,7 @@ fun EntryItem(
 
             clipPath(clipPath) {
                 drawRoundRect(
-                    color = SelfCareColor.LightPink,
+                    color = SelfCareColor.CalmWhite,
                     size = size,
                     cornerRadius = CornerRadius(cornerRadius.toPx())
                 )

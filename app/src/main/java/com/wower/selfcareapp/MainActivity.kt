@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             SelfCareAppTheme {
                 Surface(
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
                     NavHost(

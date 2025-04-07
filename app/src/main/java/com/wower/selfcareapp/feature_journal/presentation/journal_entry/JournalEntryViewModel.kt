@@ -1,5 +1,6 @@
 package com.wower.selfcareapp.feature_journal.presentation.journal_entry
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -19,7 +20,7 @@ class JournalEntryViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ): ViewModel(){
 
-    private val _entryPrompt = mutableStateOf("")
+    private val _entryPrompt = mutableStateOf("We'll load prompts here")
     val entryPrompt = _entryPrompt
 
     private val _entryContent = mutableStateOf(
@@ -69,7 +70,7 @@ class JournalEntryViewModel @Inject constructor(
                     try{
                         entryUseCases.addEntry(
                             JournalEntry(
-                                prompt = "We'll load prompts here",
+                                prompt = entryPrompt.value,
                                 content = entryContent.value.text,
                                 date = System.currentTimeMillis(),
                                 id = currentEntryId

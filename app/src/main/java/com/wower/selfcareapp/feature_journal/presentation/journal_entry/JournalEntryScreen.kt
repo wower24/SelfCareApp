@@ -1,5 +1,6 @@
 package com.wower.selfcareapp.feature_journal.presentation.journal_entry
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -66,7 +67,8 @@ fun JournalEntryScreen(
         }
     ) {
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.background(MaterialTheme.colorScheme.tertiary)
+                .fillMaxSize()
                 .padding(it)
                 .padding(16.dp)
         ) {
