@@ -78,7 +78,7 @@ dependencies {
     // Dagger - Hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
     kapt("com.google.dagger:hilt-compiler:2.51.1")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")

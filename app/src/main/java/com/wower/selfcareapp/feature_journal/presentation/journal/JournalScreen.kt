@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.wower.selfcareapp.feature_journal.presentation.journal.components.EntryItem
+import com.wower.selfcareapp.feature_journal.presentation.util.Screen
 import kotlinx.coroutines.launch
 
 @Composable
@@ -45,7 +46,9 @@ fun JournalScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {},
+                onClick = {
+                    navController.navigate(Screen.JournalEntryScreen.route)
+                },
                 containerColor = MaterialTheme.colorScheme.tertiary
             ) {
                 Icon(
@@ -74,7 +77,8 @@ fun JournalScreen(
                         entry = entry,
                         modifier = Modifier.fillMaxWidth()
                             .clickable {
-
+                                navController.navigate(Screen.JournalEntryScreen.route
+                                + "?noteId=${entry.id}")
                             },
                         onDeleteClick = {
                             viewModel.onEvent(JournalEvent.DeleteEntry(entry))

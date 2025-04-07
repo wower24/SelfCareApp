@@ -1,6 +1,7 @@
 package com.wower.selfcareapp.feature_journal.presentation.journal
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wower.selfcareapp.feature_journal.domain.model.JournalEntry
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class JournalViewModel @Inject constructor(
-    private val entryUseCases: EntryUseCases
+    private val entryUseCases: EntryUseCases,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _state = mutableStateOf(JournalState())
