@@ -4,7 +4,9 @@ import android.app.Application
 import androidx.room.Room
 import com.wower.selfcareapp.feature_journal.data.data_source.SelfCareDatabase
 import com.wower.selfcareapp.feature_journal.data.repository.JournalEntryRepositoryImpl
+import com.wower.selfcareapp.feature_journal.data.repository.JournalPromptRepositoryImpl
 import com.wower.selfcareapp.feature_journal.domain.repository.JournalEntryRepository
+import com.wower.selfcareapp.feature_journal.domain.repository.JournalPromptRepository
 import com.wower.selfcareapp.feature_journal.domain.use_case.AddEntry
 import com.wower.selfcareapp.feature_journal.domain.use_case.DeleteEntry
 import com.wower.selfcareapp.feature_journal.domain.use_case.EntryUseCases
@@ -33,6 +35,12 @@ object AppModule {
     @Singleton
     fun provideJournalEntryRepository(db: SelfCareDatabase): JournalEntryRepository {
         return JournalEntryRepositoryImpl(db.journalEntryDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideJournalPromptRepository(db: SelfCareDatabase) :JournalPromptRepository {
+        return JournalPromptRepositoryImpl(db.journalPromptDao)
     }
 
     @Provides

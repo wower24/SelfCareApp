@@ -11,7 +11,10 @@ interface JournalPromptDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPrompt(prompt: JournalPrompt)
 
-    @Query("SELECT prompt FROM journal_prompts WHERE isNotUsed = 1 ORDER BY RANDOM() LIMIT 1")
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPrompts(prompts: List<JournalPrompt>)
+
+    @Query("SELECT * FROM journal_prompts WHERE isNotUsed = 1 ORDER BY RANDOM() LIMIT 1")
     suspend fun getRandomPrompt(): JournalPrompt?
 
     @Query("UPDATE journal_prompts SET isNotUsed = 0 WHERE id = :promptId")

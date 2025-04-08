@@ -1,21 +1,38 @@
 package com.wower.selfcareapp.feature_journal.data.repository
 
+import com.wower.selfcareapp.feature_journal.data.data_source.JournalPromptDao
+import com.wower.selfcareapp.feature_journal.domain.model.JournalPrompt
 import com.wower.selfcareapp.feature_journal.domain.repository.JournalPromptRepository
 
 class JournalPromptRepositoryImpl(
-    private var prompts: MutableList<Pair<String, Int>>
+    private val dao: JournalPromptDao
 ) : JournalPromptRepository {
-    override suspend fun getRandomPrompt(): String? {
-        return prompts.randomOrNull()?.first
+
+    override suspend fun insertPrompt(prompt: JournalPrompt) {
+        dao.insertPrompt(prompt)
+    }
+
+    override suspend fun initializePrompts(prompts: List<String>) {
+        val journalPrompts: List<JournalPrompt> = listOf<JournalPrompt>()
+        prompts.forEach { prompt ->
+            journalPrompts.plus(JournalPrompt(prompt = prompt, isNotUsed = true))
+        }
+        dao.insertPrompts(journalPrompts)
+    }
+
+    override suspend fun insertPrompts(prompts: List<JournalPrompt>) {
+        dao.insertPrompts(prompts)
+    }
+
+    override suspend fun getRandomPrompt(): JournalPrompt? {
+        return dao.getRandomPrompt()
     }
 
     override suspend fun markPromptAsUsed(promptId: Int) {
-        prompts[promptId] = prompts[promptId].copy(second = -1)
+        dao.markPromptAsUsed(promptId)
     }
 
     override suspend fun resetPrompts() {
-        prompts.forEachIndexed { index, pair ->
-            prompts[index] = pair.copy(second = index)
-        }
+        dao.resetPrompts()
     }
 }
