@@ -40,7 +40,8 @@ object AppModule {
             app,
             SelfCareDatabase::class.java,
             SelfCareDatabase.DATABASE_NAME
-        ).addMigrations(MIGRATION_1_2)
+        ).createFromAsset("self_care_db.db")
+            .fallbackToDestructiveMigrationFrom(2)
             .build()
     }
 
