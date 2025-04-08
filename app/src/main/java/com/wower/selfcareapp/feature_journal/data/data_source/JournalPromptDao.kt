@@ -12,7 +12,7 @@ interface JournalPromptDao {
     suspend fun insertPrompt(prompt: JournalPrompt)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPrompts(prompts: List<JournalPrompt>)
+    fun insertPrompts(prompts: List<JournalPrompt>)
 
     @Query("SELECT * FROM journal_prompts WHERE isNotUsed = 1 ORDER BY RANDOM() LIMIT 1")
     suspend fun getRandomPrompt(): JournalPrompt?

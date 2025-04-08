@@ -4,7 +4,7 @@ import android.content.Context
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-fun textFileDataToMutableList(
+fun textFileDataToList(
     context: Context,
     fileName: String
 ): List<String> {
@@ -12,8 +12,8 @@ fun textFileDataToMutableList(
     try {
         val inputStream = context.assets.open(fileName)
         val reader = BufferedReader(InputStreamReader(inputStream))
-        reader.forEachLine { prompt ->
-            data.plus(prompt)
+        reader.forEachLine { line ->
+            data = data.plus(line.removeRange(0, 5))
         }
         reader.close()
     } catch(e: Exception) {

@@ -5,13 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.wower.selfcareapp.feature_journal.data.data_source.textFileDataToMutableList
 import com.wower.selfcareapp.feature_journal.presentation.journal.JournalScreen
 import com.wower.selfcareapp.feature_journal.presentation.journal_entry.JournalEntryScreen
 import com.wower.selfcareapp.feature_journal.presentation.util.Screen

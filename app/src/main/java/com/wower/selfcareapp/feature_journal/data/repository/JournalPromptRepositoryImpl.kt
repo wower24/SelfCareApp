@@ -12,10 +12,10 @@ class JournalPromptRepositoryImpl(
         dao.insertPrompt(prompt)
     }
 
-    override suspend fun initializePrompts(prompts: List<String>) {
-        val journalPrompts: List<JournalPrompt> = listOf<JournalPrompt>()
+    override fun initializePrompts(prompts: List<String>) {
+        var journalPrompts: List<JournalPrompt> = listOf<JournalPrompt>()
         prompts.forEach { prompt ->
-            journalPrompts.plus(JournalPrompt(prompt = prompt, isNotUsed = true))
+            journalPrompts = journalPrompts.plus(JournalPrompt(prompt = prompt, isNotUsed = true))
         }
         dao.insertPrompts(journalPrompts)
     }
