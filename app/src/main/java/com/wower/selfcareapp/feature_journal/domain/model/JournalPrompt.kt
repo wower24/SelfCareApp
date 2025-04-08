@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "journal_prompts")
 data class JournalPrompt(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
     val prompt: String,
-    val isNotUsed: Boolean = true
+    val isNotUsed: Boolean = true,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0
 )

@@ -1,7 +1,10 @@
 package com.wower.selfcareapp.feature_journal.domain.repository
 
+import com.wower.selfcareapp.feature_journal.domain.model.JournalPrompt
+
 interface JournalPromptRepository {
-    suspend fun getRandomPrompt(): String?
+    fun insertPrompt(prompt: JournalPrompt)
+    suspend fun getRandomPrompt(): JournalPrompt?
     suspend fun markPromptAsUsed(promptId: Int)
     suspend fun resetPrompts()
 }
