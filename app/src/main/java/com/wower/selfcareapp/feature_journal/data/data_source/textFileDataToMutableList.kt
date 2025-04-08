@@ -22,6 +22,6 @@ fun textFileDataToMutableList(
     } catch(e: Exception) {
         e.printStackTrace()
     }
-    
+
     return data
 }
