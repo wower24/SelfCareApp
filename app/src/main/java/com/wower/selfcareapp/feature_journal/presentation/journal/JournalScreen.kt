@@ -24,12 +24,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.wower.selfcareapp.feature_journal.presentation.journal.components.EntryItem
-import com.wower.selfcareapp.feature_journal.presentation.util.Screen
+import com.wower.selfcareapp.util.Screen
 import kotlinx.coroutines.launch
 
 @Composable

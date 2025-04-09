@@ -13,7 +13,7 @@ import com.wower.selfcareapp.feature_journal.domain.model.JournalPrompt
     entities = [JournalEntry::class,
                JournalPrompt::class,
                Affirmation::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class SelfCareDatabase: RoomDatabase() {

@@ -2,16 +2,12 @@ package com.wower.selfcareapp.di
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.RoomDatabase.Callback
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.wower.selfcareapp.di.SelfCareDatabase
-import com.wower.selfcareapp.feature_journal.data.data_source.textFileDataToList
+import com.wower.selfcareapp.feature_affirmation.data.repository.AffirmationRepositoryImpl
+import com.wower.selfcareapp.feature_affirmation.domain.repository.AffirmationRepository
+import com.wower.selfcareapp.feature_affirmation.domain.use_case.GetRandomAffirmation
 import com.wower.selfcareapp.feature_journal.data.repository.JournalEntryRepositoryImpl
 import com.wower.selfcareapp.feature_journal.data.repository.JournalPromptRepositoryImpl
-import com.wower.selfcareapp.feature_journal.domain.model.JournalPrompt
 import com.wower.selfcareapp.feature_journal.domain.repository.JournalEntryRepository
 import com.wower.selfcareapp.feature_journal.domain.repository.JournalPromptRepository
 import com.wower.selfcareapp.feature_journal.domain.use_case.AddEntry
@@ -36,13 +32,12 @@ object AppModule {
         app: Application,
         @ApplicationContext context: Context
     ): SelfCareDatabase {
-        textFileDataToList(context, "journal_prompts.txt")
         return Room.databaseBuilder(
             app,
             SelfCareDatabase::class.java,
             SelfCareDatabase.DATABASE_NAME
         ).createFromAsset("self_care_db.db")
-            .fallbackToDestructiveMigrationFrom(2)
+            .fallbackToDestructiveMigrationFrom(1)
             .build()
     }
 
@@ -60,6 +55,12 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideAffirmationRepository(db: SelfCareDatabase) : AffirmationRepository {
+        return AffirmationRepositoryImpl(db.affirmationDao)
+    }
+
+    @Provides
+    @Singleton
     fun provideEntryUseCases(repository: JournalEntryRepository): EntryUseCases {
         return EntryUseCases(
             getEntries = GetEntries(repository),
@@ -73,6 +74,12 @@ object AppModule {
     @Singleton // If you want a single instance for the app's lifetime
     fun provideGetRandomPrompt(repository: JournalPromptRepository): GetRandomPrompt {
         return GetRandomPrompt(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetRandomAffirmation(repository: AffirmationRepository): GetRandomAffirmation {
+        return GetRandomAffirmation(repository)
     }
 }
 
