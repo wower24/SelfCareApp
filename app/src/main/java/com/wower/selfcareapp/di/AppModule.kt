@@ -7,7 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabase.Callback
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.wower.selfcareapp.feature_journal.data.data_source.SelfCareDatabase
+import com.wower.selfcareapp.di.SelfCareDatabase
 import com.wower.selfcareapp.feature_journal.data.data_source.textFileDataToList
 import com.wower.selfcareapp.feature_journal.data.repository.JournalEntryRepositoryImpl
 import com.wower.selfcareapp.feature_journal.data.repository.JournalPromptRepositoryImpl

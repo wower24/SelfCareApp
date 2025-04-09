@@ -7,5 +7,5 @@ interface AffirmationRepository {
     suspend fun insertAffirmation(affirmation: Affirmation)
     suspend fun getRandomAffirmation(): Affirmation?
     suspend fun markAffirmationAsUsed(affirmationId: Int)
-    suspend fun resetAffirmation()
+    suspend fun resetAffirmations()
 }

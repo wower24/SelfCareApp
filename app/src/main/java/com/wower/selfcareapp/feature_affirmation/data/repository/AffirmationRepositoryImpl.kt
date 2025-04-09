@@ -19,7 +19,7 @@ class AffirmationRepositoryImpl(
         dao.markAffirmationAsUsed(affirmationId)
     }
 
-    override suspend fun resetAffirmation() {
+    override suspend fun resetAffirmations() {
         dao.resetAffirmations()
     }
 }
