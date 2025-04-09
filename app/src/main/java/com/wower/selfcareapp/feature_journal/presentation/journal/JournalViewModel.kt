@@ -14,8 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class JournalViewModel @Inject constructor(
-    private val entryUseCases: EntryUseCases,
-    savedStateHandle: SavedStateHandle
+    private val entryUseCases: EntryUseCases
 ) : ViewModel() {
 
     private val _state = mutableStateOf(JournalState())
