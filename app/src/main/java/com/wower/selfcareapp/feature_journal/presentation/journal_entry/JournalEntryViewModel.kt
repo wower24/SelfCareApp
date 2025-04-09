@@ -1,6 +1,5 @@
 package com.wower.selfcareapp.feature_journal.presentation.journal_entry
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
