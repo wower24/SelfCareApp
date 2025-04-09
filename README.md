@@ -17,6 +17,5 @@
 
 TODO:
 - Box Breathing exercise feature
-- Affirmations splash screen
 - Grounding Exercises display
 - 100 happy days feature (similar to journal)
