@@ -57,11 +57,13 @@ fun JournalEntryScreen(
             FloatingActionButton(
                 onClick = {
                     viewModel.onEvent(JournalEntryEvent.SaveEntry)
-                }
+                },
+                containerColor = MaterialTheme.colorScheme.primary
             ) {
                 Icon(
                     imageVector = Icons.Default.Save,
-                    contentDescription = "Save entry"
+                    contentDescription = "Save entry",
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }
@@ -75,7 +77,7 @@ fun JournalEntryScreen(
             Text(
                 text = promptState.toString(),
                 style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.secondary
+                color = MaterialTheme.colorScheme.onTertiary
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -91,7 +93,7 @@ fun JournalEntryScreen(
                 },
                 isHintVisible = contentState.isHintVisible,
                 singleLine = false,
-                textStyle = MaterialTheme.typography.bodyMedium,
+                textStyle = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.fillMaxHeight()
             )
         }

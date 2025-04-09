@@ -53,13 +53,13 @@ fun EntryItem(
 
             clipPath(clipPath) {
                 drawRoundRect(
-                    color = SelfCareColor.CalmWhite,
+                    color = SelfCareColor.RegularWhite,
                     size = size,
                     cornerRadius = CornerRadius(cornerRadius.toPx())
                 )
                 drawRoundRect(
                     color = Color(
-                        ColorUtils.blendARGB(0xDDB3C4, 0x000000, 0.2f)
+                        ColorUtils.blendARGB(0xF3F0E6, 0x000000, 0.2f)
                     ),
                     topLeft = Offset(size.width - cutCornerSize.toPx(), -100f),
                     size = Size(cutCornerSize.toPx() + 100f, cutCornerSize.toPx() + 100f),
@@ -83,7 +83,7 @@ fun EntryItem(
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = entry.content,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 5,
                 overflow = TextOverflow.Ellipsis

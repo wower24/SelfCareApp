@@ -12,17 +12,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = SelfCareColor.LightBlue,
-    secondary = SelfCareColor.RegularWhite,
+    primary = SelfCareColor.DarkBlue,
+    onPrimary = SelfCareColor.LightBlue,
+    secondary = SelfCareColor.DarkPink,
+    onSecondary = SelfCareColor.RegularWhite,
     tertiary = SelfCareColor.Yellow,
+    onTertiary = SelfCareColor.RegularWhite,
     onSurface = SelfCareColor.DarkBlue
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = SelfCareColor.LightPink,
+    onPrimary = SelfCareColor.DarkPink,
     secondary = SelfCareColor.CalmWhite,
+    onSecondary = SelfCareColor.Gray,
     tertiary = SelfCareColor.LightGreen,
+    onTertiary = SelfCareColor.DarkGreen,
     onSurface = SelfCareColor.DarkGreen
+
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
