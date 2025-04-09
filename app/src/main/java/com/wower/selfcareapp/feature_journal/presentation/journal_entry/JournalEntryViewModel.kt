@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.wower.selfcareapp.feature_journal.domain.model.InvalidEntryException
 import com.wower.selfcareapp.feature_journal.domain.model.JournalEntry
 import com.wower.selfcareapp.feature_journal.domain.use_case.EntryUseCases
+import com.wower.selfcareapp.feature_journal.domain.use_case.GetRandomPrompt
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -17,10 +18,11 @@ import javax.inject.Inject
 @HiltViewModel
 class JournalEntryViewModel @Inject constructor(
     private val entryUseCases: EntryUseCases,
+    private val getRandomPrompt: GetRandomPrompt,
     savedStateHandle: SavedStateHandle
 ): ViewModel(){
 
-    private val _entryPrompt = mutableStateOf("We'll load prompts here")
+    private val _entryPrompt = mutableStateOf("Prompt should go here")
     val entryPrompt = _entryPrompt
 
     private val _entryContent = mutableStateOf(
@@ -48,6 +50,10 @@ class JournalEntryViewModel @Inject constructor(
                         )
                     }
                 }
+            } else {
+                viewModelScope.launch {
+                    _entryPrompt.value = getRandomPrompt()?.prompt ?: "How was your day?"
+                }
             }
         }
     }
@@ -70,7 +76,7 @@ class JournalEntryViewModel @Inject constructor(
                     try{
                         entryUseCases.addEntry(
                             JournalEntry(
-                                prompt = entryPrompt.value,
+                                prompt = entryPrompt.value.toString(),
                                 content = entryContent.value.text,
                                 date = System.currentTimeMillis(),
                                 id = currentEntryId

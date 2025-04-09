@@ -6,7 +6,7 @@ import com.wower.selfcareapp.feature_journal.domain.repository.JournalPromptRepo
 class GetRandomPrompt(
     private val repository: JournalPromptRepository
 ) {
-    suspend operator fun invoke() : JournalPrompt? {
+    operator suspend fun invoke() : JournalPrompt? {
         var prompt = repository.getRandomPrompt()
         if (prompt == null) {
             repository.resetPrompts()

@@ -19,6 +19,7 @@ import com.wower.selfcareapp.feature_journal.domain.use_case.DeleteEntry
 import com.wower.selfcareapp.feature_journal.domain.use_case.EntryUseCases
 import com.wower.selfcareapp.feature_journal.domain.use_case.GetEntries
 import com.wower.selfcareapp.feature_journal.domain.use_case.GetEntryById
+import com.wower.selfcareapp.feature_journal.domain.use_case.GetRandomPrompt
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -68,20 +69,10 @@ object AppModule {
         )
     }
 
-    private fun SelfCareDatabase.Companion.getPrepopulatedCallback(context: Context): Callback {
-        return object: RoomDatabase.Callback() {
-            override fun onCreate(db: SupportSQLiteDatabase) {
-                super.onCreate(db)
-                val prompts = textFileDataToList(context, "journal_prompts.txt")
-                prompts.forEach { prompt ->
-                    val journalPrompt = JournalPrompt(prompt = prompt)
-                    db.execSQL(
-                        "INERT OR IGNORE INTO journal_prompts (prompt, isNotUsed) VALUES ('${journalPrompt.prompt}', ${journalPrompt.isNotUsed})"
-                    )
-                }
-
-            }
-        }
+    @Provides
+    @Singleton // If you want a single instance for the app's lifetime
+    fun provideGetRandomPrompt(repository: JournalPromptRepository): GetRandomPrompt {
+        return GetRandomPrompt(repository)
     }
 }
 

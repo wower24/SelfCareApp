@@ -12,18 +12,6 @@ class JournalPromptRepositoryImpl(
         dao.insertPrompt(prompt)
     }
 
-    override fun initializePrompts(prompts: List<String>) {
-        var journalPrompts: List<JournalPrompt> = listOf<JournalPrompt>()
-        prompts.forEach { prompt ->
-            journalPrompts = journalPrompts.plus(JournalPrompt(prompt = prompt, isNotUsed = true))
-        }
-        dao.insertPrompts(journalPrompts)
-    }
-
-    override suspend fun insertPrompts(prompts: List<JournalPrompt>) {
-        dao.insertPrompts(prompts)
-    }
-
     override suspend fun getRandomPrompt(): JournalPrompt? {
         return dao.getRandomPrompt()
     }

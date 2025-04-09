@@ -73,7 +73,7 @@ fun JournalEntryScreen(
                 .padding(16.dp)
         ) {
             Text(
-                text = promptState,
+                text = promptState.toString(),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.secondary
             )
