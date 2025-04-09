@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "affirmations")
-data class Affirmations(
+data class Affirmation(
     val affirmation: String,
     val isNotUsed: Boolean = true,
     @PrimaryKey(autoGenerate = true)
