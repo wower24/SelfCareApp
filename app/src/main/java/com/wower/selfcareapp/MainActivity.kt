@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.wower.selfcareapp.feature_affirmation.presentation.affirmation.AffirmationScreen
+import com.wower.selfcareapp.feature_breathing.presentation.box_breathing.BoxBreathingScreen
 import com.wower.selfcareapp.feature_journal.presentation.journal.JournalScreen
 import com.wower.selfcareapp.feature_journal.presentation.journal_entry.JournalEntryScreen
 import com.wower.selfcareapp.util.Screen
@@ -47,6 +48,9 @@ class MainActivity : ComponentActivity() {
                             )
                         ) {
                             JournalEntryScreen(navController = navController)
+                        }
+                        composable(route = Screen.BoxBreathingScreen.route) {
+                            BoxBreathingScreen(navController = navController)
                         }
                     }
                 }
