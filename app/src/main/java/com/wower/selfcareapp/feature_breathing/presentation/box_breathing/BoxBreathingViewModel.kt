@@ -1,5 +1,6 @@
 package com.wower.selfcareapp.feature_breathing.presentation.box_breathing
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wower.selfcareapp.feature_breathing.domain.model.BreathingPhase

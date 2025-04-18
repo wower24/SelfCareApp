@@ -24,10 +24,10 @@ import com.wower.selfcareapp.ui.theme.SelfCareColor
 
 @Composable
 fun BoxBreathingScreen(
-    navController: NavController,
     viewModel: BoxBreathingViewModel = hiltViewModel()
 ) {
     val state = viewModel.uiState.collectAsState()
+
         Column(
             modifier = Modifier.fillMaxSize()
                 .background(SelfCareColor.LightGreen),
