@@ -53,7 +53,7 @@ fun AffirmationScreen(
         ) {
             Text(
                 text = "Continue",
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onPrimary
             )

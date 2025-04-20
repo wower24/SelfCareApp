@@ -76,7 +76,7 @@ fun JournalEntryScreen(
         ) {
             Text(
                 text = promptState.toString(),
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onTertiary
             )
 

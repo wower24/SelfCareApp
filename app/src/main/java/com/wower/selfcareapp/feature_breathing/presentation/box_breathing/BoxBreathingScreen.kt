@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -19,22 +20,38 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.wower.selfcareapp.BottomNavigationBar
 import com.wower.selfcareapp.ui.theme.SelfCareAppTheme
 import com.wower.selfcareapp.ui.theme.SelfCareColor
+import com.wower.selfcareapp.util.BottomNavItem
 
 @Composable
 fun BoxBreathingScreen(
+    navController: NavController,
     viewModel: BoxBreathingViewModel = hiltViewModel()
 ) {
     val state = viewModel.uiState.collectAsState()
 
+    Scaffold(
+        bottomBar = {
+            BottomNavigationBar(
+                navController = navController,
+                items = listOf(
+                    BottomNavItem.Journal,
+                    BottomNavItem.Breathing
+                )
+            )
+        }
+    ) {
         Column(
             modifier = Modifier.fillMaxSize()
+                .padding(it)
                 .background(SelfCareColor.LightGreen),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
             //TIMER
+            //timer works logically but doesn't update the UI for some reason
             Text(
                 text = "${state.value.phase}",
                 style = MaterialTheme.typography.titleMedium,
@@ -86,4 +103,5 @@ fun BoxBreathingScreen(
                 }
             }
         }
+    }
 }

@@ -75,8 +75,8 @@ fun EntryItem(
         ) {
             Text(
                 text = entry.prompt,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onTertiary,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -84,7 +84,7 @@ fun EntryItem(
             Text(
                 text = entry.content,
                 style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = MaterialTheme.colorScheme.onTertiary,
                 maxLines = 5,
                 overflow = TextOverflow.Ellipsis
             )

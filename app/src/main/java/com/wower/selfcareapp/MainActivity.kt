@@ -33,18 +33,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    Scaffold(
-                        bottomBar = {
-                            BottomNavigationBar(
-                                navController = navController,
-                                items = listOf(
-                                BottomNavItem.Journal,
-                                BottomNavItem.Breathing
-                                )
-                            )
-                        }
-                    ) {
-                        Box(modifier = Modifier.padding(it)) {
+
                             NavHost(
                                 navController = navController,
                                 startDestination = Screen.AffirmationScreen.route
@@ -67,10 +56,8 @@ class MainActivity : ComponentActivity() {
                                     JournalEntryScreen(navController = navController)
                                 }
                                 composable(route = Screen.BoxBreathingScreen.route) {
-                                    BoxBreathingScreen()
+                                    BoxBreathingScreen(navController)
                                 }
-                            }
-                        }
                     }
 
                 }
