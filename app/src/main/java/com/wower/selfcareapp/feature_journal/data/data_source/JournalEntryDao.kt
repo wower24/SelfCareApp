@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface JournalEntryDao {
-    @Query("SELECT * FROM journal_entries")
+    @Query("SELECT * FROM journal_entries ORDER BY date DESC")
     fun getAllEntries(): Flow<List<JournalEntry>>
 
     @Query("SELECT * FROM journal_entries WHERE id = :id")

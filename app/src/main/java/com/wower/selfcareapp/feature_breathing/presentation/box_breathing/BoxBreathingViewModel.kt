@@ -26,7 +26,7 @@ class BoxBreathingViewModel: ViewModel() {
             repeat(totalCycles) { cycle ->
                 BreathingPhase.entries.forEach { phase ->
                     for(second in 4 downTo 1) {
-                        _uiState.value.copy(
+                        _uiState.value = _uiState.value.copy(
                             phase = phase,
                             timeRemainingInPhase = second,
                             cyclesRemaining = totalCycles - cycle,
