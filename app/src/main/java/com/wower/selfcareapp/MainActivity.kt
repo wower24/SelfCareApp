@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.wower.selfcareapp.feature_affirmation.presentation.affirmation.AffirmationScreen
@@ -21,6 +22,8 @@ import com.wower.selfcareapp.feature_journal.presentation.journal_entry.JournalE
 import com.wower.selfcareapp.util.Screen
 import com.wower.selfcareapp.ui.theme.SelfCareAppTheme
 import com.wower.selfcareapp.util.BottomNavItem
+import com.wower.selfcareapp.util.bottomNavItems
+import androidx.compose.runtime.getValue
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,6 +37,20 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navController = rememberNavController()
 
+                    Scaffold(
+                        bottomBar = {
+                            val navBackStackEntry by navController.currentBackStackEntryAsState()
+                            val currentRoute = navBackStackEntry?.destination?.route
+
+                            if(currentRoute in bottomNavItems.map { it.route }) {
+                                BottomNavigationBar(
+                                    navController = navController,
+                                    items = bottomNavItems
+                                )
+                            }
+                        }
+                    ) {
+                        Box(modifier = Modifier.padding(it)) {
                             NavHost(
                                 navController = navController,
                                 startDestination = Screen.AffirmationScreen.route
@@ -58,7 +75,10 @@ class MainActivity : ComponentActivity() {
                                 composable(route = Screen.BoxBreathingScreen.route) {
                                     BoxBreathingScreen(navController)
                                 }
+                            }
+                        }
                     }
+
 
                 }
             }

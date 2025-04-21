@@ -43,15 +43,6 @@ fun JournalScreen(
     val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(
-        bottomBar = {
-            BottomNavigationBar(
-                navController = navController,
-                items = listOf(
-                    BottomNavItem.Journal,
-                    BottomNavItem.Breathing
-                )
-            )
-        },
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState)
         },

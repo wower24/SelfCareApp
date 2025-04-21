@@ -23,3 +23,8 @@ sealed class BottomNavItem(
         icon = Icons.Default.Air
     )
 }
+
+val bottomNavItems = listOf(
+    BottomNavItem.Journal,
+    BottomNavItem.Breathing
+)

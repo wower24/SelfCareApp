@@ -32,20 +32,8 @@ fun BoxBreathingScreen(
 ) {
     val state = viewModel.uiState.collectAsState()
 
-    Scaffold(
-        bottomBar = {
-            BottomNavigationBar(
-                navController = navController,
-                items = listOf(
-                    BottomNavItem.Journal,
-                    BottomNavItem.Breathing
-                )
-            )
-        }
-    ) {
         Column(
             modifier = Modifier.fillMaxSize()
-                .padding(it)
                 .background(SelfCareColor.LightGreen),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
@@ -102,6 +90,5 @@ fun BoxBreathingScreen(
                     )
                 }
             }
-        }
     }
 }
