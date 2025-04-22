@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.wower.selfcareapp.BottomNavigationBar
+import com.wower.selfcareapp.feature_breathing.presentation.box_breathing.components.BreathingSquare
 import com.wower.selfcareapp.ui.theme.SelfCareAppTheme
 import com.wower.selfcareapp.ui.theme.SelfCareColor
 import com.wower.selfcareapp.util.BottomNavItem
@@ -33,27 +35,39 @@ fun BoxBreathingScreen(
 ) {
     val state: State<BreathingUIState> = viewModel.uiState.collectAsState()
 
-        Column(
-            modifier = Modifier.fillMaxSize()
-                .background(SelfCareColor.LightGreen),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+
+    Column(
+        modifier = Modifier.fillMaxSize()
+            .background(SelfCareColor.LightGreen),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Box(
+            modifier = Modifier.size(220.dp)
+            .padding(16.dp),
+            contentAlignment = Alignment.Center
         ) {
+            if(state.value.isRunning) {
+                BreathingSquare(state.value.phase)
+            }
             //TIMER
-            //timer works logically but doesn't update the UI for some reason
-            Text(
-                text = "${state.value.phase}",
-                style = MaterialTheme.typography.titleMedium,
-                color = SelfCareColor.LightPink,
-                modifier = Modifier.padding(vertical = 16.dp)
-            )
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = state.value.phase.name
+                        .replace("AfterInhale", "")
+                        .replace("AfterExhale", ""),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = SelfCareColor.LightPink,
+                    modifier = Modifier.padding(vertical = 16.dp)
+                )
 
-            Text(
-                text = "${state.value.timeRemainingInPhase}",
-                style = MaterialTheme.typography.titleLarge,
-                color = SelfCareColor.DarkPink
-            )
-
+                Text(
+                    text = "${state.value.timeRemainingInPhase}",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = SelfCareColor.DarkPink
+                )
+            }
+        }
             //BUTTONS
             Row(
                 modifier = Modifier.fillMaxWidth()
