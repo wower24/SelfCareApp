@@ -27,13 +27,14 @@ import com.wower.selfcareapp.ui.theme.SelfCareColor
 
 @Composable
 fun BreathingSquare(phase: BreathingPhase) {
+
     val transition = rememberInfiniteTransition(label = "phaseAnimation")
 
     val progress = transition.animateFloat(
         initialValue = 0f,
-        targetValue = 1f,
+        targetValue = 4f,
         animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 4000, easing = LinearEasing),
+            animation = tween(durationMillis = 16000, easing = LinearEasing),
             repeatMode = RepeatMode.Restart
         ),
         label = "progress"
@@ -48,76 +49,70 @@ fun BreathingSquare(phase: BreathingPhase) {
         val bottomRight = Offset(sideLength, sideLength)
         val bottomLeft = Offset(0f, sideLength)
 
-        when(phase) {
-            BreathingPhase.Inhale -> {
-                    drawLine(
-                        color = SelfCareColor.DarkPink,
-                        start = start,
-                        end = Offset(progress * sideLength, 0f),
-                        strokeWidth = 10f
-                    )
-            }
-            BreathingPhase.HoldAfterInhale -> {
-                drawLine(
-                    color = SelfCareColor.DarkPink,
-                    start = start,
-                    end = topRight,
-                    strokeWidth = 10f
-                )
-                    drawLine(
-                        color = SelfCareColor.LightPink,
-                        start = topRight,
-                        end = Offset(sideLength, progress * sideLength),
-                        strokeWidth = 10f
-                    )
-            }
-            BreathingPhase.Exhale -> {
-                    drawLine(
-                        color = SelfCareColor.DarkPink,
-                        start = start,
-                        end = topRight,
-                        strokeWidth = 10f
-                    )
-                    drawLine(
-                        color = SelfCareColor.LightPink,
-                        start = topRight,
-                        end = bottomRight,
-                        strokeWidth = 10f
-                    )
-                    drawLine(
-                        color = SelfCareColor.DarkPink,
-                        start = bottomRight,
-                        end = Offset(sideLength - (progress * sideLength), sideLength),
-                        strokeWidth = 10f
-                    )
-            }
-            BreathingPhase.HoldAfterExhale -> {
-                    drawLine(
-                        color = SelfCareColor.DarkPink,
-                        start = start,
-                        end = topRight,
-                        strokeWidth = 10f
-                    )
-                    drawLine(
-                        color = SelfCareColor.LightPink,
-                        start = topRight,
-                        end = bottomRight,
-                        strokeWidth = 10f
-                    )
-                    drawLine(
-                        color = SelfCareColor.DarkPink,
-                        start = bottomRight,
-                        end = bottomLeft,
-                        strokeWidth = 10f
-                    )
-                    drawLine(
-                        color = SelfCareColor.LightPink,
-                        start = bottomLeft,
-                        end = Offset(0f, sideLength - (progress * sideLength)),
-                        strokeWidth = 10f
-                    )
-            }
-
+        if(progress <= 1) {
+            drawLine(
+                color = SelfCareColor.DarkPink,
+                start = start,
+                end = Offset(progress * sideLength, 0f),
+                strokeWidth = 10f
+            )
+        } else if(progress <= 2) {
+            drawLine(
+                color = SelfCareColor.DarkPink,
+                start = start,
+                end = topRight,
+                strokeWidth = 10f
+            )
+            drawLine(
+                color = SelfCareColor.LightPink,
+                start = topRight,
+                end = Offset(sideLength, (progress - 1) * sideLength),
+                strokeWidth = 10f
+            )
+        } else if(progress <= 3) {
+            drawLine(
+                color = SelfCareColor.DarkPink,
+                start = start,
+                end = topRight,
+                strokeWidth = 10f
+            )
+            drawLine(
+                color = SelfCareColor.LightPink,
+                start = topRight,
+                end = bottomRight,
+                strokeWidth = 10f
+            )
+            drawLine(
+                color = SelfCareColor.DarkPink,
+                start = bottomRight,
+                end = Offset((sideLength - (progress - 2) * sideLength), sideLength),
+                strokeWidth = 10f
+            )
+        } else {
+            drawLine(
+                color = SelfCareColor.DarkPink,
+                start = start,
+                end = topRight,
+                strokeWidth = 10f
+            )
+            drawLine(
+                color = SelfCareColor.LightPink,
+                start = topRight,
+                end = bottomRight,
+                strokeWidth = 10f
+            )
+            drawLine(
+                color = SelfCareColor.DarkPink,
+                start = bottomRight,
+                end = bottomLeft,
+                strokeWidth = 10f
+            )
+            drawLine(
+                color = SelfCareColor.LightPink,
+                start = bottomLeft,
+                end = Offset(0f, sideLength - ((progress - 3) * sideLength)),
+                strokeWidth = 10f
+            )
         }
     }
 }

@@ -57,14 +57,8 @@ fun BoxBreathingScreen(
                         .replace("AfterInhale", "")
                         .replace("AfterExhale", ""),
                     style = MaterialTheme.typography.titleMedium,
-                    color = SelfCareColor.LightPink,
+                    color = SelfCareColor.DarkGreen,
                     modifier = Modifier.padding(vertical = 16.dp)
-                )
-
-                Text(
-                    text = "${state.value.timeRemainingInPhase}",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = SelfCareColor.DarkPink
                 )
             }
         }
