@@ -26,19 +26,7 @@ import com.wower.selfcareapp.ui.theme.SelfCareColor
 //draw square
 
 @Composable
-fun BreathingSquare(phase: BreathingPhase) {
-
-    val transition = rememberInfiniteTransition(label = "phaseAnimation")
-
-    val progress = transition.animateFloat(
-        initialValue = 0f,
-        targetValue = 4f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 16000, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "progress"
-    ).value
+fun BreathingSquare(progress :Float) {
 
     Canvas(modifier = Modifier.size(200.dp)) {
         val squareSize = size.minDimension
@@ -49,14 +37,14 @@ fun BreathingSquare(phase: BreathingPhase) {
         val bottomRight = Offset(sideLength, sideLength)
         val bottomLeft = Offset(0f, sideLength)
 
-        if(progress <= 1) {
+        if(progress <= 1f) {
             drawLine(
                 color = SelfCareColor.DarkPink,
                 start = start,
                 end = Offset(progress * sideLength, 0f),
                 strokeWidth = 10f
             )
-        } else if(progress <= 2) {
+        } else if(progress <= 2f) {
             drawLine(
                 color = SelfCareColor.DarkPink,
                 start = start,
@@ -69,7 +57,7 @@ fun BreathingSquare(phase: BreathingPhase) {
                 end = Offset(sideLength, (progress - 1) * sideLength),
                 strokeWidth = 10f
             )
-        } else if(progress <= 3) {
+        } else if(progress <= 3f) {
             drawLine(
                 color = SelfCareColor.DarkPink,
                 start = start,

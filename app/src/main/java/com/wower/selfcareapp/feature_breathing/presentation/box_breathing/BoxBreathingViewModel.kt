@@ -19,7 +19,7 @@ class BoxBreathingViewModel: ViewModel() {
     private var breathingJob: Job? = null
 
     fun start(durationInMinutes: Int) {
-        val totalCycles = durationInMinutes * 60 / 15
+        val totalCycles = durationInMinutes * 60 / 16
         breathingJob?.cancel()
 
         breathingJob = viewModelScope.launch {
