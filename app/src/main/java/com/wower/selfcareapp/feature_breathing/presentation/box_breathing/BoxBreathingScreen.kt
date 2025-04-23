@@ -43,25 +43,6 @@ fun BoxBreathingScreen(
 ) {
     val state: State<BreathingUIState> = viewModel.uiState.collectAsState()
 
-    val transition = rememberInfiniteTransition(label = "phaseAnimation")
-
-    val progress = transition.animateFloat(
-        initialValue = 0f,
-        targetValue = 4f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 16000, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "progress"
-    ).value
-
-    val currentPhase = when {
-        progress < 1f -> BreathingPhase.Inhale
-        progress < 2f -> BreathingPhase.HoldAfterInhale
-        progress < 3f -> BreathingPhase.Exhale
-        else -> BreathingPhase.HoldAfterExhale
-    }
-
     Column(
         modifier = Modifier.fillMaxSize()
             .background(SelfCareColor.LightGreen),
@@ -74,12 +55,12 @@ fun BoxBreathingScreen(
             contentAlignment = Alignment.Center
         ) {
             if(state.value.isRunning) {
-                BreathingSquare(progress)
+                BreathingSquare(phase = state.value.phase)
 
                 //TIMER
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
-                        text = currentPhase.name
+                        text = state.value.phase.name
                             .replace("AfterInhale", "")
                             .replace("AfterExhale", ""),
                         style = MaterialTheme.typography.titleMedium,

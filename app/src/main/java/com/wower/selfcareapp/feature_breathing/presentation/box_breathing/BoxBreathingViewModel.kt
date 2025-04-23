@@ -25,14 +25,21 @@ class BoxBreathingViewModel: ViewModel() {
         breathingJob = viewModelScope.launch {
             repeat(totalCycles) { cycle ->
                 BreathingPhase.entries.forEach { phase ->
-                    for(second in 4 downTo 1) {
+                    val phaseStart = System.currentTimeMillis()
+
+                    for (second in 4 downTo 1) {
+                        val now = System.currentTimeMillis()
+                        val elapsed = now - phaseStart
+                        val targetDelay = (second * 1000L) - elapsed
+
                         _uiState.value = _uiState.value.copy(
                             phase = phase,
                             timeRemainingInPhase = second,
                             cyclesRemaining = totalCycles - cycle,
                             isRunning = true
                         )
-                        delay(1000)
+
+                        if (targetDelay > 0) delay(targetDelay)
                     }
                 }
             }

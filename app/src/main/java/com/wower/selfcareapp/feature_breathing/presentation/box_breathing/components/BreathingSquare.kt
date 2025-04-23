@@ -4,6 +4,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
@@ -11,6 +12,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.withFrameNanos
@@ -26,7 +28,18 @@ import com.wower.selfcareapp.ui.theme.SelfCareColor
 //draw square
 
 @Composable
-fun BreathingSquare(progress :Float) {
+fun BreathingSquare(
+    phase: BreathingPhase
+) {
+    val progress = remember { Animatable(0f) }
+
+    LaunchedEffect(phase) {
+        progress.snapTo(0f)
+        progress.animateTo(
+            targetValue = 1f,
+            animationSpec = tween(durationMillis = 4000, easing = LinearEasing)
+        )
+    }
 
     Canvas(modifier = Modifier.size(200.dp)) {
         val squareSize = size.minDimension
@@ -37,14 +50,14 @@ fun BreathingSquare(progress :Float) {
         val bottomRight = Offset(sideLength, sideLength)
         val bottomLeft = Offset(0f, sideLength)
 
-        if(progress <= 1f) {
+        if(phase == BreathingPhase.Inhale) {
             drawLine(
                 color = SelfCareColor.DarkPink,
                 start = start,
-                end = Offset(progress * sideLength, 0f),
+                end = Offset(progress.value * sideLength, 0f),
                 strokeWidth = 10f
             )
-        } else if(progress <= 2f) {
+        } else if(phase == BreathingPhase.HoldAfterInhale) {
             drawLine(
                 color = SelfCareColor.DarkPink,
                 start = start,
@@ -54,10 +67,10 @@ fun BreathingSquare(progress :Float) {
             drawLine(
                 color = SelfCareColor.LightPink,
                 start = topRight,
-                end = Offset(sideLength, (progress - 1) * sideLength),
+                end = Offset(sideLength, progress.value * sideLength),
                 strokeWidth = 10f
             )
-        } else if(progress <= 3f) {
+        } else if(phase == BreathingPhase.Exhale) {
             drawLine(
                 color = SelfCareColor.DarkPink,
                 start = start,
@@ -73,7 +86,7 @@ fun BreathingSquare(progress :Float) {
             drawLine(
                 color = SelfCareColor.DarkPink,
                 start = bottomRight,
-                end = Offset((sideLength - (progress - 2) * sideLength), sideLength),
+                end = Offset((sideLength - progress.value * sideLength), sideLength),
                 strokeWidth = 10f
             )
         } else {
@@ -98,7 +111,7 @@ fun BreathingSquare(progress :Float) {
             drawLine(
                 color = SelfCareColor.LightPink,
                 start = bottomLeft,
-                end = Offset(0f, sideLength - ((progress - 3) * sideLength)),
+                end = Offset(0f, sideLength - (progress.value * sideLength)),
                 strokeWidth = 10f
             )
         }
