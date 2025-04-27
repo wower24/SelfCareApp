@@ -55,7 +55,7 @@ fun BoxBreathingScreen(
             contentAlignment = Alignment.Center
         ) {
             if(state.value.isRunning) {
-                BreathingSquare(phase = state.value.phase)
+                BreathingSquare(viewModel)
 
                 //TIMER
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {

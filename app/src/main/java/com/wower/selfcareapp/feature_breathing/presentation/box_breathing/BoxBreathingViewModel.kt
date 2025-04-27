@@ -16,40 +16,26 @@ class BoxBreathingViewModel: ViewModel() {
     private val _uiState = MutableStateFlow(BreathingUIState())
     val uiState: StateFlow<BreathingUIState> = _uiState.asStateFlow()
 
-    private var breathingJob: Job? = null
-
     fun start(durationInMinutes: Int) {
-        val totalCycles = durationInMinutes * 60 / 16
-        breathingJob?.cancel()
+        _uiState.value = _uiState.value.copy(
+            cyclesRemaining = durationInMinutes * 4,
+            isRunning = true
+        )
+    }
 
-        breathingJob = viewModelScope.launch {
-            repeat(totalCycles) { cycle ->
-                BreathingPhase.entries.forEach { phase ->
-                    val phaseStart = System.currentTimeMillis()
+    fun updatePhase(phase: BreathingPhase) {
+        _uiState.value = _uiState.value.copy(
+            phase = phase
+        )
+    }
 
-                    for (second in 4 downTo 1) {
-                        val now = System.currentTimeMillis()
-                        val elapsed = now - phaseStart
-                        val targetDelay = (second * 1000L) - elapsed
-
-                        _uiState.value = _uiState.value.copy(
-                            phase = phase,
-                            timeRemainingInPhase = second,
-                            cyclesRemaining = totalCycles - cycle,
-                            isRunning = true
-                        )
-
-                        if (targetDelay > 0) delay(targetDelay)
-                    }
-                }
-            }
-
-            reset()
-        }
+    fun decreaseCycles() {
+        _uiState.value = _uiState.value.copy(
+            cyclesRemaining = _uiState.value.cyclesRemaining - 1
+        )
     }
 
     fun reset() {
-        breathingJob?.cancel()
         _uiState.value = BreathingUIState()
     }
 }

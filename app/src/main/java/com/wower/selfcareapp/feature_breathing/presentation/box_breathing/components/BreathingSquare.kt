@@ -1,5 +1,6 @@
 package com.wower.selfcareapp.feature_breathing.presentation.box_breathing.components
 
+import android.util.Log
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -22,6 +23,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.wower.selfcareapp.feature_breathing.domain.model.BreathingPhase
+import com.wower.selfcareapp.feature_breathing.presentation.box_breathing.BoxBreathingViewModel
 import com.wower.selfcareapp.ui.theme.SelfCareAppTheme
 import com.wower.selfcareapp.ui.theme.SelfCareColor
 
@@ -30,7 +32,7 @@ import com.wower.selfcareapp.ui.theme.SelfCareColor
 
 @Composable
 fun BreathingSquare(
-    phase: BreathingPhase
+    viewModel: BoxBreathingViewModel,
 ) {
 
     val progress = remember { Animatable(0f) }
@@ -42,6 +44,25 @@ fun BreathingSquare(
                 targetValue = 4f,
                 animationSpec = tween(durationMillis = 16000, easing = LinearEasing)
             )
+        }
+    }
+
+    val currentPhase = when {
+        progress.value <= 1f -> BreathingPhase.Inhale
+        progress.value <= 2f -> BreathingPhase.HoldAfterInhale
+        progress.value <= 3f -> BreathingPhase.Exhale
+        else -> BreathingPhase.HoldAfterExhale
+    }
+
+    LaunchedEffect(currentPhase) {
+        viewModel.updatePhase(currentPhase)
+
+        if(viewModel.uiState.value.phase == BreathingPhase.Inhale) {
+            viewModel.decreaseCycles()
+            Log.d("BoxBreathingViewModel", "cyclesRemaining: ${viewModel.uiState.value.cyclesRemaining}")
+            if(viewModel.uiState.value.cyclesRemaining < 0) {
+                viewModel.reset()
+            }
         }
     }
 
@@ -58,18 +79,10 @@ fun BreathingSquare(
         )
 
         val currentPosition = when {
-            progress.value <= 1f -> {
-                Offset(progress.value * sideLength, 0f)
-            }
-            progress.value <= 2f -> {
-                Offset(sideLength, (progress.value - 1f) * sideLength)
-            }
-            progress.value <= 3f -> {
-                Offset(sideLength - (progress.value - 2f) * sideLength, sideLength)
-            }
-            else -> {
-                Offset(0f, sideLength - (progress.value - 3f) * sideLength)
-            }
+            progress.value <= 1f -> Offset(progress.value * sideLength, 0f)
+            progress.value <= 2f -> Offset(sideLength, (progress.value - 1f) * sideLength)
+            progress.value <= 3f -> Offset(sideLength - (progress.value - 2f) * sideLength, sideLength)
+            else -> Offset(0f, sideLength - (progress.value - 3f) * sideLength)
         }
 
         drawCircle(
