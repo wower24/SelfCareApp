@@ -33,6 +33,7 @@ fun ExerciseDetail(exercise: GroundingExercise) {
             text = exercise.title,
             style = MaterialTheme.typography.titleLarge,
             color = SelfCareColor.DarkBlue,
+            textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
         )
 

@@ -5,18 +5,18 @@ import com.wower.selfcareapp.R
 val groundingExercises :List<GroundingExercise> = listOf(
     GroundingExercise(
         imageResId = R.drawable.dog,
-        title ="5-4-3-2-1",
+        title = "Name...",
         instructions = listOf(
-            "Name 5 things you can see",
-            "Name 4 things you can touch",
-            "Name 3 things you can hear",
-            "Name 2 things you can smell",
-            "Name 1 thing you can taste"
+            "5 things you can see",
+            "4 things you can touch",
+            "3 things you can hear",
+            "2 things you can smell",
+            "1 thing you can taste"
         )
     ),
     GroundingExercise(
         imageResId = R.drawable.dog,
-        title ="Find and Touch something that's...",
+        title ="Find and Touch something...",
         instructions = listOf(
             "Red",
             "Orange",
@@ -38,8 +38,8 @@ val groundingExercises :List<GroundingExercise> = listOf(
         imageResId = R.drawable.dog,
         title ="A-Z",
         instructions = listOf(
-            "1. Find a category (animals, fruits, etc.)",
-            "2. Name an object from the category that starts with A, B, C, etc."
+            "Pick a category\n(animals, fruits, etc.)",
+            "Name an object from\nthe category\nthat starts with A, B, C, etc."
         )
     ),
     GroundingExercise(
@@ -47,7 +47,7 @@ val groundingExercises :List<GroundingExercise> = listOf(
         title ="Touch the grass",
         instructions = listOf(
             "Put your hands on the grass (or floor)",
-            "How does it feel? Is it warm or cold?"
+            "Is it warm or cold?"
         )
     )
 )
