@@ -26,7 +26,7 @@ fun BottomNavigationBar(
     items: List<BottomNavItem>
 ) {
     val selectedIndex = rememberSaveable {
-        mutableStateOf(0)
+        mutableStateOf(1)
     }
 
     NavigationBar {

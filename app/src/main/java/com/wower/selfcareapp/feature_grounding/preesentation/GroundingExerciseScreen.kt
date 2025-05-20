@@ -16,12 +16,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.wower.selfcareapp.feature_grounding.data.groundingExercises
 import com.wower.selfcareapp.ui.theme.SelfCareAppTheme
 import com.wower.selfcareapp.ui.theme.SelfCareColor
+import com.wower.selfcareapp.util.Screen
 
 @Composable
-fun GroundingExerciseScreen() {
+fun GroundingExerciseScreen( navController: NavController ) {
     Box(
         modifier = Modifier.background(SelfCareColor.LightBlue)
             .fillMaxSize()
@@ -30,7 +32,7 @@ fun GroundingExerciseScreen() {
        ExerciseDetail(exercise = groundingExercises.random())
 
         Button(
-            onClick = { /* GO BACK HOME*/ },
+            onClick = { navController.navigate(Screen.JournalScreen.route) },
             colors = ButtonDefaults.buttonColors(containerColor = SelfCareColor.DarkBlue),
             modifier = Modifier.fillMaxWidth()
                 .padding(16.dp)
@@ -43,13 +45,5 @@ fun GroundingExerciseScreen() {
                 color = SelfCareColor.LightBlue
             )
         }
-    }
-}
-
-@Preview
-@Composable
-fun GroundingExerciseScreenPreview() {
-    SelfCareAppTheme {
-        GroundingExerciseScreen()
     }
 }

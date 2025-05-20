@@ -24,6 +24,7 @@ import com.wower.selfcareapp.ui.theme.SelfCareAppTheme
 import com.wower.selfcareapp.util.BottomNavItem
 import com.wower.selfcareapp.util.bottomNavItems
 import androidx.compose.runtime.getValue
+import com.wower.selfcareapp.feature_grounding.preesentation.GroundingExerciseScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,7 +43,7 @@ class MainActivity : ComponentActivity() {
                             val navBackStackEntry by navController.currentBackStackEntryAsState()
                             val currentRoute = navBackStackEntry?.destination?.route
 
-                            if(currentRoute in bottomNavItems.map { it.route }) {
+                            if(currentRoute == "journal_screen") {
                                 BottomNavigationBar(
                                     navController = navController,
                                     items = bottomNavItems
@@ -74,6 +75,9 @@ class MainActivity : ComponentActivity() {
                                 }
                                 composable(route = Screen.BoxBreathingScreen.route) {
                                     BoxBreathingScreen(navController)
+                                }
+                                composable(route = Screen.GroundingExerciseScreen.route) {
+                                    GroundingExerciseScreen(navController)
                                 }
                             }
                         }
