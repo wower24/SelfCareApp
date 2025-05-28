@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.wower.selfcareapp.feature_affirmation.domain.model.Affirmation
-import com.wower.selfcareapp.feature_journal.domain.model.JournalPrompt
 
 @Dao
 interface AffirmationDao {

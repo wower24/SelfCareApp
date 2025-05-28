@@ -1,15 +1,14 @@
 package com.wower.selfcareapp.feature_journal.presentation.journal
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wower.selfcareapp.feature_journal.domain.model.JournalEntry
 import com.wower.selfcareapp.feature_journal.domain.use_case.EntryUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

@@ -1,16 +1,10 @@
 package com.wower.selfcareapp.feature_breathing.presentation.box_breathing
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.wower.selfcareapp.feature_breathing.domain.model.BreathingPhase
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 
 class BoxBreathingViewModel: ViewModel() {
     private val _uiState = MutableStateFlow(BreathingUIState())

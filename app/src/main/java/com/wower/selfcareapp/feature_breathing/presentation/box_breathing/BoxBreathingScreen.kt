@@ -1,11 +1,5 @@
 package com.wower.selfcareapp.feature_breathing.presentation.box_breathing
 
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,7 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -27,16 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.wower.selfcareapp.BottomNavigationBar
-import com.wower.selfcareapp.feature_breathing.domain.model.BreathingPhase
 import com.wower.selfcareapp.feature_breathing.presentation.box_breathing.components.BreathingSquare
-import com.wower.selfcareapp.ui.theme.SelfCareAppTheme
 import com.wower.selfcareapp.ui.theme.SelfCareColor
-import com.wower.selfcareapp.util.BottomNavItem
 import com.wower.selfcareapp.util.Screen
 
 @Composable

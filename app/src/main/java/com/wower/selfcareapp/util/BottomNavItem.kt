@@ -1,6 +1,5 @@
 package com.wower.selfcareapp.util
 
-import android.graphics.drawable.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Air
 import androidx.compose.material.icons.filled.Anchor

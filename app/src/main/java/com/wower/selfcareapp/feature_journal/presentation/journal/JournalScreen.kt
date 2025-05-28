@@ -27,9 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.wower.selfcareapp.BottomNavigationBar
 import com.wower.selfcareapp.feature_journal.presentation.journal.components.EntryItem
-import com.wower.selfcareapp.util.BottomNavItem
 import com.wower.selfcareapp.util.Screen
 import kotlinx.coroutines.launch
 

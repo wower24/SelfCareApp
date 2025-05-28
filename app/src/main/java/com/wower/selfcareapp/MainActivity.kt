@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -17,14 +18,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.wower.selfcareapp.feature_affirmation.presentation.affirmation.AffirmationScreen
 import com.wower.selfcareapp.feature_breathing.presentation.box_breathing.BoxBreathingScreen
+import com.wower.selfcareapp.feature_grounding.preesentation.GroundingExerciseScreen
 import com.wower.selfcareapp.feature_journal.presentation.journal.JournalScreen
 import com.wower.selfcareapp.feature_journal.presentation.journal_entry.JournalEntryScreen
-import com.wower.selfcareapp.util.Screen
 import com.wower.selfcareapp.ui.theme.SelfCareAppTheme
-import com.wower.selfcareapp.util.BottomNavItem
+import com.wower.selfcareapp.util.Screen
 import com.wower.selfcareapp.util.bottomNavItems
-import androidx.compose.runtime.getValue
-import com.wower.selfcareapp.feature_grounding.preesentation.GroundingExerciseScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
