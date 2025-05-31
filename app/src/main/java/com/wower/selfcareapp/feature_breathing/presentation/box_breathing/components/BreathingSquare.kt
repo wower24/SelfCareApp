@@ -12,10 +12,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.wower.selfcareapp.feature_breathing.domain.model.BreathingPhase
 import com.wower.selfcareapp.feature_breathing.presentation.box_breathing.BoxBreathingViewModel
 import com.wower.selfcareapp.ui.theme.SelfCareColor
+import kotlinx.coroutines.delay
 
 
 //draw square
@@ -25,6 +27,7 @@ fun BreathingSquare(
     viewModel: BoxBreathingViewModel,
 ) {
 
+    val context = LocalContext.current
     val progress = remember { Animatable(0f) }
 
     LaunchedEffect(Unit) {
@@ -49,9 +52,23 @@ fun BreathingSquare(
 
         if(viewModel.uiState.value.phase == BreathingPhase.Inhale) {
             viewModel.decreaseCycles()
-            Log.d("BoxBreathingViewModel", "cyclesRemaining: ${viewModel.uiState.value.cyclesRemaining}")
             if(viewModel.uiState.value.cyclesRemaining < 0) {
                 viewModel.reset()
+            }
+        }
+
+        when (currentPhase) {
+            BreathingPhase.Inhale, BreathingPhase.Exhale -> {
+                repeat(8) {
+                    viewModel.vibrate(context, 100L)
+                    delay(400L)
+                }
+            }
+            BreathingPhase.HoldAfterInhale, BreathingPhase.HoldAfterExhale -> {
+                repeat(4) {
+                    viewModel.vibrate(context, 100L)
+                    delay(900L)
+                }
             }
         }
     }
