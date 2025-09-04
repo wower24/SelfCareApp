@@ -12,7 +12,7 @@ import javax.inject.Inject
 class AffirmationViewModel @Inject constructor (
     private val getRandomAffirmation: GetRandomAffirmation
 ): ViewModel() {
-    private val _affirmation = mutableStateOf("Affirmation should go here")
+    private val _affirmation = mutableStateOf(" ")
     val affirmation = _affirmation
 
     init {

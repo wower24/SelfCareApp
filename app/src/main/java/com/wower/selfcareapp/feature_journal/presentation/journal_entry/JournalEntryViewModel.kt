@@ -21,7 +21,7 @@ class JournalEntryViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ): ViewModel(){
 
-    private val _entryPrompt = mutableStateOf("Prompt should go here")
+    private val _entryPrompt = mutableStateOf(" ")
     val entryPrompt = _entryPrompt
 
     private val _entryContent = mutableStateOf(
