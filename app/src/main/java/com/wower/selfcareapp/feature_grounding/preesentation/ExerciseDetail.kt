@@ -35,14 +35,14 @@ fun ExerciseDetail(exercise: GroundingExercise) {
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
         )
-
+/*
         Image(
             painter = painterResource(id = exercise.imageResId),
             contentDescription = exercise.title,
             modifier = Modifier.size(200.dp)
                 .padding(50.dp)
         )
-
+*/
         exercise.instructions.forEach { instruction ->
             Text(
                 text = instruction,
