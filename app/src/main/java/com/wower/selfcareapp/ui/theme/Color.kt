@@ -14,6 +14,7 @@ object SelfCareColor {
     val DarkGreen = Color(0xFF94AD73)
     val LightGreen = Color(0xFFC3D6AE)
     val CalmWhite = Color(0xFFF4F2EC)
-    val Gray = Color(0xFFE6E1DC)
+    val Gray = Color(0xFF727283)
+    val DarkGray = Color(0xFF524D64)
     val LightPink = Color(0xFFDDB3C4)
 }

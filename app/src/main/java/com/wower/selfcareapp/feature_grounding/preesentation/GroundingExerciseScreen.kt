@@ -28,7 +28,7 @@ fun GroundingExerciseScreen(
     navController: NavController,
     viewModel: GroundingExerciseViewModel = hiltViewModel()
 ) {
-    val exerciseState = viewModel.exercise.value
+    val exerciseState = viewModel.exercise.value;
 
         Box(
             modifier = Modifier.background(SelfCareColor.LightBlue)

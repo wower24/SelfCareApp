@@ -35,13 +35,13 @@ fun BoxBreathingScreen(
     val state: State<BreathingUIState> = viewModel.uiState.collectAsState()
 
     Box(
-        modifier = Modifier.background(SelfCareColor.LightGreen)
+        modifier = Modifier.background(MaterialTheme.colorScheme.tertiary)
         .fillMaxSize()
         .padding(16.dp)
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
-                .background(SelfCareColor.LightGreen),
+                .background(MaterialTheme.colorScheme.tertiary),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -60,7 +60,7 @@ fun BoxBreathingScreen(
                                 .replace("AfterInhale", "")
                                 .replace("AfterExhale", ""),
                             style = MaterialTheme.typography.titleMedium,
-                            color = SelfCareColor.DarkGreen,
+                            color = MaterialTheme.colorScheme.onTertiary,
                             modifier = Modifier.padding(vertical = 16.dp)
                         )
                     }
@@ -69,7 +69,7 @@ fun BoxBreathingScreen(
                         text = "Choose duration",
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.titleMedium,
-                        color = SelfCareColor.DarkGreen,
+                        color = MaterialTheme.colorScheme.onTertiary,
                         modifier = Modifier.padding(vertical = 16.dp)
                     )
                 }
@@ -115,7 +115,7 @@ fun BoxBreathingScreen(
 
         Button(
             onClick = { navController.navigate(Screen.JournalScreen.route) },
-            colors = ButtonDefaults.buttonColors(containerColor = SelfCareColor.DarkGreen),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onTertiary),
             modifier = Modifier.fillMaxWidth()
                 .padding(16.dp)
                 .align(Alignment.BottomCenter)
@@ -124,7 +124,7 @@ fun BoxBreathingScreen(
                 text = "Done",
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.Bold,
-                color = SelfCareColor.LightGreen
+                color = MaterialTheme.colorScheme.tertiary
             )
         }
     }

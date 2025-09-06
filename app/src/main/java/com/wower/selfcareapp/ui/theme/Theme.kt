@@ -15,11 +15,11 @@ import androidx.compose.ui.platform.LocalContext
 private val DarkColorScheme = darkColorScheme(
     primary = SelfCareColor.DarkBlue,
     onPrimary = SelfCareColor.LightBlue,
-    secondary = SelfCareColor.DarkPink,
-    onSecondary = SelfCareColor.RegularWhite,
-    tertiary = SelfCareColor.Yellow,
-    onTertiary = SelfCareColor.RegularWhite,
-    onSurface = SelfCareColor.DarkBlue
+    secondary = SelfCareColor.DarkGray,
+    onSecondary = SelfCareColor.Gray,
+    tertiary = SelfCareColor.Gray,
+    onTertiary = SelfCareColor.LightBlue,
+    onSurface = SelfCareColor.LightBlue
 )
 
 private val LightColorScheme = lightColorScheme(
