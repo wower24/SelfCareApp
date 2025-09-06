@@ -15,21 +15,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.wower.selfcareapp.feature_affirmation.presentation.affirmation.AffirmationViewModel
 import com.wower.selfcareapp.feature_grounding.data.GroundingExercise
 import com.wower.selfcareapp.feature_grounding.data.groundingExercises
 import com.wower.selfcareapp.ui.theme.SelfCareColor
 import com.wower.selfcareapp.util.Screen
 
 @Composable
-fun GroundingExerciseScreen( navController: NavController ) {
+fun GroundingExerciseScreen(
+    navController: NavController,
+    viewModel: GroundingExerciseViewModel = hiltViewModel()
+) {
+    val exerciseState = viewModel.exercise.value
 
         Box(
             modifier = Modifier.background(SelfCareColor.LightBlue)
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            ExerciseDetail(exercise = groundingExercises.random())
+            ExerciseDetail(exercise = exerciseState)
 
             Button(
                 onClick = {

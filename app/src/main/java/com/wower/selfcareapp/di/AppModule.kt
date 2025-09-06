@@ -6,6 +6,7 @@ import androidx.room.Room
 import com.wower.selfcareapp.feature_affirmation.data.repository.AffirmationRepositoryImpl
 import com.wower.selfcareapp.feature_affirmation.domain.repository.AffirmationRepository
 import com.wower.selfcareapp.feature_affirmation.domain.use_case.GetRandomAffirmation
+import com.wower.selfcareapp.feature_grounding.domain.use_case.GetRandomGroundingExercise
 import com.wower.selfcareapp.feature_journal.data.repository.JournalEntryRepositoryImpl
 import com.wower.selfcareapp.feature_journal.data.repository.JournalPromptRepositoryImpl
 import com.wower.selfcareapp.feature_journal.domain.repository.JournalEntryRepository
@@ -80,6 +81,12 @@ object AppModule {
     @Singleton
     fun provideGetRandomAffirmation(repository: AffirmationRepository): GetRandomAffirmation {
         return GetRandomAffirmation(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetRandomGroundingExercise(): GetRandomGroundingExercise {
+        return GetRandomGroundingExercise()
     }
 }
 
