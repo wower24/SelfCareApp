@@ -37,6 +37,7 @@ fun EntryItem(
     cutCornerSize: Dp = 30.dp,
     onDeleteClick: () -> Unit
 ) {
+    val cardColor = MaterialTheme.colorScheme.secondary
     Box(
         modifier = modifier
     ) {
@@ -51,9 +52,10 @@ fun EntryItem(
                 close()
             }
 
+
             clipPath(clipPath) {
                 drawRoundRect(
-                    color = SelfCareColor.Gray,
+                    color = cardColor,
                     size = size,
                     cornerRadius = CornerRadius(cornerRadius.toPx())
                 )
