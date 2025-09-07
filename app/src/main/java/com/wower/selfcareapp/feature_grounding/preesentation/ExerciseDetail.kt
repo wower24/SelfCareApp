@@ -3,7 +3,9 @@ package com.wower.selfcareapp.feature_grounding.preesentation
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -25,8 +27,8 @@ fun ExerciseDetail(exercise: GroundingExercise) {
     Column(
         modifier = Modifier.fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             text = exercise.title,
@@ -43,14 +45,20 @@ fun ExerciseDetail(exercise: GroundingExercise) {
                 .padding(50.dp)
         )
 */
-        exercise.instructions.forEach { instruction ->
-            Text(
-                text = instruction,
-                style = MaterialTheme.typography.titleMedium,
-                color = SelfCareColor.DarkBlue,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
+        Column(modifier = Modifier.fillMaxSize()
+            .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            exercise.instructions.forEach { instruction ->
+                Text(
+                    text = instruction,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = SelfCareColor.DarkBlue,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(bottom = 32.dp)
+                )
+            }
         }
     }
 }
