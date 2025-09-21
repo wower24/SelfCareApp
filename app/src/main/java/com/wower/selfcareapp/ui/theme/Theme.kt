@@ -19,7 +19,9 @@ private val DarkColorScheme = darkColorScheme(
     onSecondary = SelfCareColor.Gray,
     tertiary = SelfCareColor.Gray,
     onTertiary = SelfCareColor.LightBlue,
-    onSurface = SelfCareColor.LightBlue
+    onSurface = SelfCareColor.LightBlue,
+    secondaryContainer = SelfCareColor.DarkBlue,
+    onSecondaryContainer = SelfCareColor.LightBlue
 )
 
 private val LightColorScheme = lightColorScheme(

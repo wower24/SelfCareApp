@@ -6,6 +6,7 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -29,6 +30,8 @@ fun BreathingSquare(
 
     val context = LocalContext.current
     val progress = remember { Animatable(0f) }
+    val lineColor = MaterialTheme.colorScheme.onTertiary
+
 
     LaunchedEffect(Unit) {
         while (true) {
@@ -78,7 +81,7 @@ fun BreathingSquare(
         val sideLength = squareSize
 
         drawRect(
-            color = SelfCareColor.DarkGreen,
+            color = lineColor,
             topLeft = Offset.Zero,
             alpha = 0.5f,
             style = Stroke(10f),
